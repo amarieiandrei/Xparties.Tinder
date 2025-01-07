@@ -1,0 +1,8 @@
+TODOS:
+    - Validations of data in order to not store in database a number instead of string
+    - DTOs & ModelMapper & Converter.
+    - What means @Transactional in service and in controller
+    - How to understand the errors in Springboot?
+    - ExceptionHandler what means? and Annotations?
+    - How to encrypt -> spring.datasource.username=
+                     -> spring.datasource.password=
