@@ -1,9 +1,11 @@
 package com.demo.Xparties.Tinder.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,6 +35,15 @@ public class Event {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(name = "photo", nullable = false)
-    private String photo;
+    @JsonIgnore
+    @OneToMany(mappedBy = "event")
+    private List<Photo> photos;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "enrollments",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id")
+    )
+    private List<Person> persons;
 }

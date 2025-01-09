@@ -42,7 +42,7 @@ public class PersonController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping( path = "/{externalId}")
+    @DeleteMapping(path = "/{externalId}")
     public void deletePerson(@PathVariable String externalId) {
         personService.deletePerson(externalId);
     }

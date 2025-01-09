@@ -1,9 +1,6 @@
 package com.demo.Xparties.Tinder.Service;
 
-import com.demo.Xparties.Tinder.Exception.PersonException.PersonNotCreated;
-import com.demo.Xparties.Tinder.Exception.PersonException.PersonNotDeleted;
-import com.demo.Xparties.Tinder.Exception.PersonException.PersonNotFound;
-import com.demo.Xparties.Tinder.Exception.PersonException.PersonNotUpdated;
+import com.demo.Xparties.Tinder.Exception.PersonException.*;
 import com.demo.Xparties.Tinder.Model.Person;
 import com.demo.Xparties.Tinder.Repository.PersonRepository;
 import jakarta.transaction.Transactional;
@@ -27,7 +24,7 @@ public class PersonService {
 
             Optional<Person> personOptional = personRepository.findByPersonEmail(person.getEmail());
             if (personOptional.isPresent()) {
-                throw new IllegalStateException("person with same email already exists.");
+                throw new PersonAlreadyExists("person with same email already exists.");
             }
             person.setExternalId(UUID.randomUUID().toString());
             return personRepository.save(person);

@@ -24,7 +24,7 @@ public class EventController {
         return eventService.createEvent(event);
     }
 
-    @GetMapping("/events")
+    @GetMapping(path = "/events")
     public List<Event> getAllEvents() {
         return eventService.getAllEvents();
     }

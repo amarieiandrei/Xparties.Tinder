@@ -1,7 +1,10 @@
 package com.demo.Xparties.Tinder.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,4 +42,12 @@ public class Person {
 
     @Column(name = "gender", nullable = false)
     private Character gender;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "person")
+    private List<Photo> photos;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "persons")
+    private List<Event> events;
 }

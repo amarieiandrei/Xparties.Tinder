@@ -63,6 +63,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+<!--		TODO: Take a look at this to see the validation -> min 30:48 ( https://www.youtube.com/watch?v=QuvS_VLbGko ) -->
+<!--		And investigate more regarding backend validation with Springboot-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-validation</artifactId>-->
+<!--		</dependency>-->
+
     </dependencies>
 
 	<build>

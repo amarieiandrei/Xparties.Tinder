@@ -1,9 +1,6 @@
 package com.demo.Xparties.Tinder.Service;
 
-import com.demo.Xparties.Tinder.Exception.EventException.EventNotCreated;
-import com.demo.Xparties.Tinder.Exception.EventException.EventNotDeleted;
-import com.demo.Xparties.Tinder.Exception.EventException.EventNotFound;
-import com.demo.Xparties.Tinder.Exception.EventException.EventNotUpdated;
+import com.demo.Xparties.Tinder.Exception.EventException.*;
 import com.demo.Xparties.Tinder.Model.Event;
 import com.demo.Xparties.Tinder.Repository.EventRepository;
 import jakarta.transaction.Transactional;
@@ -27,7 +24,7 @@ public class EventService {
 
             Optional<Event> eventOptional = eventRepository.findByEventName(event.getName());
             if (eventOptional.isPresent()) {
-                throw new IllegalStateException("event with the same name already exists.");
+                throw new EventAlreadyExists("event with the same name already exists.");
             }
             event.setExternalId(UUID.randomUUID().toString());
             return eventRepository.save(event);
@@ -43,7 +40,7 @@ public class EventService {
 
     public Event getEventByExternalId(String externalId) {
         return eventRepository.findByExternalId(externalId)
-                .orElseThrow(() -> new EventNotFound("Event with external id " + externalId + " could not be found."));
+                .orElseThrow(() -> new EventNotFound("event with external id " + externalId + " could not be found."));
     }
 
     public void updateEvent(String externalId, @Valid Event updatedEvent) {
@@ -60,9 +57,6 @@ public class EventService {
                     }
                     if (updatedEvent.getDate() != null) {
                         event.setDate(updatedEvent.getDate());
-                    }
-                    if (updatedEvent.getPhoto() != null) {
-                        event.setPhoto(updatedEvent.getPhoto());
                     }
                     eventRepository.save(event);
                 }
