@@ -15,11 +15,7 @@ public class Photo {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id",
-            nullable = false,
-            updatable = false,
-            unique = true
-    )
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long id;
 
     @Column(name = "external_id", nullable = false, updatable = false, unique = true)
@@ -31,17 +27,12 @@ public class Photo {
     @Column(name = "content_type", nullable = false)
     private String contentType;
 
-    @JsonIgnore
     @Column(name = "data", nullable = false)
     private byte[] data;
 
-    // TODO: POSTMAN exception inspect
-    @JsonIgnore
     @ManyToOne()
     private Event event;
 
-    // TODO: POSTMAN exception inspect
-    @JsonIgnore
     @ManyToOne()
     private Person person;
 }

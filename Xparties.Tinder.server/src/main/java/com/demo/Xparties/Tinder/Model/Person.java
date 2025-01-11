@@ -1,6 +1,5 @@
 package com.demo.Xparties.Tinder.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,11 +17,7 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",
-            nullable = false,
-            updatable = false,
-            unique = true
-    )
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private Long id;
 
     @Column(name = "external_id", nullable = false, updatable = false, unique = true)
@@ -43,11 +38,9 @@ public class Person {
     @Column(name = "gender", nullable = false)
     private Character gender;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "person")
     private List<Photo> photos;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "persons")
     private List<Event> events;
 }

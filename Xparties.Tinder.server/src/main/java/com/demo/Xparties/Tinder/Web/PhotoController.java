@@ -1,8 +1,7 @@
 package com.demo.Xparties.Tinder.Web;
 
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Dto.PhotoDto.PhotoResponseDto;
 import com.demo.Xparties.Tinder.Service.PhotoService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,26 +20,18 @@ public class PhotoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Photo createPhoto(@RequestPart("data") MultipartFile file) {
+    public PhotoResponseDto createPhoto(@RequestPart("data") MultipartFile file) {
         return photoService.createPhoto(file);
     }
 
     @GetMapping(path = "/photos")
-    public List<Photo> getAllPhotos() {
+    public List<PhotoResponseDto> getAllPhotos() {
         return photoService.getAllPhotos();
     }
 
     @GetMapping(path = "/{externalId}")
-    public Photo getPhotoByExternalId(@PathVariable String externalId) {
+    public PhotoResponseDto getPhotoByExternalId(@PathVariable String externalId) {
         return photoService.getPhotoByExternalId(externalId);
-    }
-
-    @PutMapping(path = "/{externalId}")
-    public void updatePhoto(
-            @PathVariable String externalId,
-            @Valid @RequestBody Photo updatedPhoto
-    ) {
-        photoService.updatePhoto(externalId, updatedPhoto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

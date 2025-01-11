@@ -1,10 +1,11 @@
 package com.demo.Xparties.Tinder.Service;
 
+import com.demo.Xparties.Tinder.Converter.PhotoConverter;
+import com.demo.Xparties.Tinder.Dto.PhotoDto.PhotoResponseDto;
 import com.demo.Xparties.Tinder.Exception.PhotoException.*;
 import com.demo.Xparties.Tinder.Model.Photo;
 import com.demo.Xparties.Tinder.Repository.PhotoRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +14,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PhotoService {
 
     private final PhotoRepository photoRepository;
+    private final PhotoConverter photoConverter;
 
-    public Photo createPhoto(MultipartFile file) {
+    public PhotoResponseDto createPhoto(MultipartFile file) {
         try {
 
             Optional<Photo> photoOptional = photoRepository.findByPhotoFileName(file.getOriginalFilename());
@@ -32,43 +35,26 @@ public class PhotoService {
             photo.setContentType(file.getContentType());
             photo.setFileName(file.getOriginalFilename());
             photo.setData(file.getBytes());
-            return photoRepository.save(photo);
+            return photoConverter.fromEntityToResponseDto(photoRepository.save(photo));
 
         } catch (Exception e) {
             throw new PhotoNotCreated("photo could not be created.");
         }
     }
 
-    public List<Photo> getAllPhotos() {
-        return photoRepository.findAll();
+    public List<PhotoResponseDto> getAllPhotos() {
+        return photoRepository
+                .findAll()
+                .stream()
+                .map(photoConverter::fromEntityToResponseDto)
+                .collect(Collectors.toList());
     }
 
-    public Photo getPhotoByExternalId(String externalId) {
-        return photoRepository.findByExternalId(externalId)
-                .orElseThrow(() -> new PhotoNotFound("photo with external id " + externalId + " could not be found."));
-    }
-
-    public void updatePhoto(String externalId, @Valid Photo updatedPhoto) {
-        try {
-
-            if (photoRepository.existsByExternalId(externalId)) {
-                Optional<Photo> photoOptional = photoRepository.findByExternalId(externalId);
-
-                if (photoOptional.isPresent()) {
-                    Photo photo = photoOptional.get();
-
-                    if (updatedPhoto.getFileName() != null) {
-                        photo.setFileName(updatedPhoto.getFileName());
-                    }
-                    photoRepository.save(photo);
-                }
-            } else {
-                throw new PhotoNotFound("photo with external id " + externalId + " could not be found.");
-            }
-
-        } catch (Exception e) {
-            throw new PhotoNotUpdated("photo with external id " + externalId + " could not be updated.");
-        }
+    public PhotoResponseDto getPhotoByExternalId(String externalId) {
+        return photoConverter.fromEntityToResponseDto(
+                photoRepository.findByExternalId(externalId)
+                        .orElseThrow(() -> new PhotoNotFound("photo with external id " + externalId + " could not be found."))
+        );
     }
 
     @Transactional

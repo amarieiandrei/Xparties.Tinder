@@ -1,7 +1,5 @@
 TODOS:
     - Take a look on TODOs in the application
-    - Validations of data in order to not store in database a number instead of string.
-    - DTOs & ModelMapper & Converter.
     - Need to take into consideration:
         - sanitize / sanitaze the data,
         - validate the data,
