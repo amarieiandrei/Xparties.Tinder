@@ -2,14 +2,10 @@ TODOS:
     - Take a look on TODOs in the application
     - Validations of data in order to not store in database a number instead of string.
     - DTOs & ModelMapper & Converter.
-    - Difference between:
-        spring.servlet.multipart.max-file-size=100MB
-        spring.servlet.multipart.max-request-size=100MB
-        (solution: https://stackoverflow.com/a/44332602 -> See comments )
     - Need to take into consideration:
-        - sanitize / sanitaze the date
-        - validate the date
-        - limit the date properly
+        - sanitize / sanitaze the data,
+        - validate the data,
+        - limit the data properly,
         - to be a real world application
         ( Reference :
                 REF5: Spring Application Properties
@@ -24,4 +20,6 @@ TODOS:
                 https://spring.io/guides/gs/validating-form-input/
                 https://www.baeldung.com/spring-boot-bean-validation
                 https://stackoverflow.com/a/53994470
+    - Need to understand to page / pageable
+    - Bean and Configuration annotations
 

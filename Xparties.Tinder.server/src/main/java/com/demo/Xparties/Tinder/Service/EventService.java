@@ -1,15 +1,18 @@
 package com.demo.Xparties.Tinder.Service;
 
+import com.demo.Xparties.Tinder.Converter.EventConverter;
+import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
+import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
 import com.demo.Xparties.Tinder.Exception.EventException.*;
 import com.demo.Xparties.Tinder.Model.Event;
 import com.demo.Xparties.Tinder.Repository.EventRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,48 +21,47 @@ import java.util.UUID;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final EventConverter eventConverter;
 
-    public Event createEvent(@Valid Event event) {
+    public EventResponseDto createEvent(EventRequestDto eventRequestDto) {
         try {
 
+            Event event = eventConverter.fromRequestDtoToEntity(eventRequestDto);
             Optional<Event> eventOptional = eventRepository.findByEventName(event.getName());
             if (eventOptional.isPresent()) {
                 throw new EventAlreadyExists("event with the same name already exists.");
             }
             event.setExternalId(UUID.randomUUID().toString());
-            return eventRepository.save(event);
+            return eventConverter.fromEntityToResponseDto(eventRepository.save(event));
 
         } catch (Exception e) {
             throw new EventNotCreated("event could not be created.");
         }
     }
 
-    public List<Event> getAllEvents() {
-        return eventRepository.findAll();
+    public Page<EventResponseDto> getAllEvents(Pageable pageable) {
+        return eventRepository.findAll(pageable)
+                .map(eventConverter::fromEntityToResponseDto);
     }
 
-    public Event getEventByExternalId(String externalId) {
-        return eventRepository.findByExternalId(externalId)
-                .orElseThrow(() -> new EventNotFound("event with external id " + externalId + " could not be found."));
+    public EventResponseDto getEventByExternalId(String externalId) {
+        return eventConverter.fromEntityToResponseDto(
+                eventRepository.findByExternalId(externalId)
+                        .orElseThrow(() -> new EventNotFound("event with external id " + externalId + " could not be found."))
+        );
     }
 
-    public void updateEvent(String externalId, @Valid Event updatedEvent) {
+    public EventResponseDto updateEvent(String externalId, EventRequestDto updatedEventRequestDto) {
         try {
 
             if (eventRepository.existsByExternalId(externalId)) {
-                Optional<Event> eventOptional = eventRepository.findByExternalId(externalId);
+                Event event = eventRepository.findByExternalId(externalId).get();
+                Event updatedEvent = eventConverter.fromRequestDtoToEntity(updatedEventRequestDto);
 
-                if (eventOptional.isPresent()) {
-                    Event event = eventOptional.get();
+                event.setName(updatedEvent.getName());
+                event.setDate(updatedEvent.getDate());
 
-                    if (updatedEvent.getName() != null) {
-                        event.setName(updatedEvent.getName());
-                    }
-                    if (updatedEvent.getDate() != null) {
-                        event.setDate(updatedEvent.getDate());
-                    }
-                    eventRepository.save(event);
-                }
+                return eventConverter.fromEntityToResponseDto(eventRepository.save(event));
             } else {
                 throw new EventNotFound("event with external id " + externalId + " could not be found.");
             }

@@ -1,10 +1,14 @@
 package com.demo.Xparties.Tinder.Web;
 
+import com.demo.Xparties.Tinder.Dto.PersonDto.PersonRequestDto;
+import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
 import com.demo.Xparties.Tinder.Model.Person;
 import com.demo.Xparties.Tinder.Service.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,26 +23,26 @@ public class PersonController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Person createPerson(@Valid @RequestBody Person person) {
-        return personService.createPerson(person);
+    public PersonResponseDto createPerson(@Valid @RequestBody PersonRequestDto personRequestDto) {
+        return personService.createPerson(personRequestDto);
     }
 
     @GetMapping(path = "/persons")
-    public List<Person> getAllPersons() {
-        return personService.getAllPersons();
+    public Page<PersonResponseDto> getAllPersons(Pageable pageable) {
+        return personService.getAllPersons(pageable);
     }
 
     @GetMapping(path = "/{externalId}")
-    public Person getPersonByExternalId(@PathVariable String externalId) {
+    public PersonResponseDto getPersonByExternalId(@PathVariable String externalId) {
         return personService.getPersonByExternalId(externalId);
     }
 
     @PutMapping(path = "/{externalId}")
-    public void updatePerson(
+    public PersonResponseDto updatePerson(
             @PathVariable String externalId,
-            @Valid @RequestBody Person updatedPerson
+            @Valid @RequestBody PersonRequestDto updatedPersonRequestDto
     ) {
-        personService.updatePerson(externalId, updatedPerson);
+        return personService.updatePerson(externalId, updatedPersonRequestDto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

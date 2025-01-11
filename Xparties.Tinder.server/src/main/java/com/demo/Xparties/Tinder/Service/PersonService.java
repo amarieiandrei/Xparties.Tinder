@@ -1,15 +1,18 @@
 package com.demo.Xparties.Tinder.Service;
 
+import com.demo.Xparties.Tinder.Converter.PersonConverter;
+import com.demo.Xparties.Tinder.Dto.PersonDto.PersonRequestDto;
+import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
 import com.demo.Xparties.Tinder.Exception.PersonException.*;
 import com.demo.Xparties.Tinder.Model.Person;
 import com.demo.Xparties.Tinder.Repository.PersonRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,57 +21,50 @@ import java.util.UUID;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final PersonConverter personConverter;
 
-    public Person createPerson(@Valid Person person) {
+    public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
         try {
 
+            Person person = personConverter.fromRequestDtoToEntity(personRequestDto);
             Optional<Person> personOptional = personRepository.findByPersonEmail(person.getEmail());
             if (personOptional.isPresent()) {
                 throw new PersonAlreadyExists("person with same email already exists.");
             }
             person.setExternalId(UUID.randomUUID().toString());
-            return personRepository.save(person);
+            return personConverter.fromEntityToResponseDto(personRepository.save(person));
 
         } catch (Exception e) {
             throw new PersonNotCreated("person could not be created.");
         }
     }
 
-    public List<Person> getAllPersons() {
-        return personRepository.findAll();
+    public Page<PersonResponseDto> getAllPersons(Pageable pageable) {
+        return personRepository.findAll(pageable)
+                .map(personConverter::fromEntityToResponseDto);
     }
 
-    public Person getPersonByExternalId(String externalId) {
-        return personRepository.findByExternalId(externalId)
-                .orElseThrow(() -> new PersonNotFound("person with external id " + externalId + " could not be found."));
+    public PersonResponseDto getPersonByExternalId(String externalId) {
+        return personConverter.fromEntityToResponseDto(
+                personRepository.findByExternalId(externalId)
+                        .orElseThrow(() -> new PersonNotFound("person with external id " + externalId + " could not be found."))
+        );
     }
 
-    public void updatePerson(String externalId, @Valid Person updatedPerson) {
+    public PersonResponseDto updatePerson(String externalId, PersonRequestDto updatedPersonRequestDto) {
         try {
 
             if (personRepository.existsByExternalId(externalId)) {
-                Optional<Person> personOptional = personRepository.findByExternalId(externalId);
+                    Person person = personRepository.findByExternalId(externalId).get();
+                    Person updatedPerson = personConverter.fromRequestDtoToEntity(updatedPersonRequestDto);
 
-                if (personOptional.isPresent()) {
-                    Person person = personOptional.get();
+                    person.setEmail(updatedPerson.getEmail());
+                    person.setFirstName(updatedPerson.getFirstName());
+                    person.setLastName(updatedPerson.getLastName());
+                    person.setAge(updatedPerson.getAge());
+                    person.setGender(updatedPerson.getGender());
 
-                    if (updatedPerson.getEmail() != null) {
-                        person.setEmail(updatedPerson.getEmail());
-                    }
-                    if (updatedPerson.getFirstName() != null) {
-                        person.setFirstName(updatedPerson.getFirstName());
-                    }
-                    if (updatedPerson.getLastName() != null) {
-                        person.setLastName(updatedPerson.getLastName());
-                    }
-                    if (updatedPerson.getAge() != null) {
-                        person.setAge(updatedPerson.getAge());
-                    }
-                    if (updatedPerson.getGender() != null) {
-                        person.setGender(updatedPerson.getGender());
-                    }
-                    personRepository.save(person);
-                }
+                    return personConverter.fromEntityToResponseDto(personRepository.save(person));
             } else {
                 throw new PersonNotFound("person with external id " + externalId + " could not be found.");
             }

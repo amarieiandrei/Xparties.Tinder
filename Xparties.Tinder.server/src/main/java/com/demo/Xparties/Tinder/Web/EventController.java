@@ -1,10 +1,14 @@
 package com.demo.Xparties.Tinder.Web;
 
+import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
+import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
 import com.demo.Xparties.Tinder.Model.Event;
 import com.demo.Xparties.Tinder.Service.EventService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,26 +24,26 @@ public class EventController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Event createEvent(@Valid @RequestBody Event event) {
-        return eventService.createEvent(event);
+    public EventResponseDto createEvent(@Valid @RequestBody EventRequestDto eventRequestDto) {
+        return eventService.createEvent(eventRequestDto);
     }
 
     @GetMapping(path = "/events")
-    public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
+    public Page<EventResponseDto> getAllEvents(Pageable pageable) {
+        return eventService.getAllEvents(pageable);
     }
 
     @GetMapping(path = "/{externalId}")
-    public Event getEventByExternalId(@PathVariable String externalId) {
+    public EventResponseDto getEventByExternalId(@PathVariable String externalId) {
         return eventService.getEventByExternalId(externalId);
     }
 
     @PutMapping(path = "/{externalId}")
-    public void updateEvent(
+    public EventResponseDto updateEvent(
             @PathVariable String externalId,
-            @Valid @RequestBody Event updatedEvent
+            @Valid @RequestBody EventRequestDto updatedEventRequestDto
     ) {
-        eventService.updateEvent(externalId, updatedEvent);
+        return eventService.updateEvent(externalId, updatedEventRequestDto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
