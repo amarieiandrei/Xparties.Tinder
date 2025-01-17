@@ -11,7 +11,7 @@ import jakarta.validation.ConstraintViolationException;
 
 import java.io.IOException;
 
-@RestControllerAdvice(assignableTypes = PersonController.class)
+@RestControllerAdvice()
 public class PersonExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {ConstraintViolationException.class})

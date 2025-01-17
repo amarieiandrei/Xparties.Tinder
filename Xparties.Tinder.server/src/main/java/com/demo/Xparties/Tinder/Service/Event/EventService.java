@@ -1,11 +1,16 @@
-package com.demo.Xparties.Tinder.Service;
+package com.demo.Xparties.Tinder.Service.Event;
 
 import com.demo.Xparties.Tinder.Converter.EventConverter;
+import com.demo.Xparties.Tinder.Converter.PersonConverter;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
+import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
 import com.demo.Xparties.Tinder.Exception.EventException.*;
+import com.demo.Xparties.Tinder.Exception.PersonException.PersonNotFound;
 import com.demo.Xparties.Tinder.Model.Event;
+import com.demo.Xparties.Tinder.Model.Person;
 import com.demo.Xparties.Tinder.Repository.EventRepository;
+import com.demo.Xparties.Tinder.Repository.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +18,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class EventService {
+public class EventService implements IEventService {
 
     private final EventRepository eventRepository;
     private final EventConverter eventConverter;
+    private final PersonRepository personRepository;
+    private final PersonConverter personConverter;
 
+    @Override
     public EventResponseDto createEvent(EventRequestDto eventRequestDto) {
         try {
 
@@ -39,11 +49,13 @@ public class EventService {
         }
     }
 
+    @Override
     public Page<EventResponseDto> getAllEvents(Pageable pageable) {
         return eventRepository.findAll(pageable)
                 .map(eventConverter::fromEntityToResponseDto);
     }
 
+    @Override
     public EventResponseDto getEventByExternalId(String externalId) {
         return eventConverter.fromEntityToResponseDto(
                 eventRepository.findByExternalId(externalId)
@@ -51,6 +63,7 @@ public class EventService {
         );
     }
 
+    @Override
     public EventResponseDto updateEvent(String externalId, EventRequestDto updatedEventRequestDto) {
         try {
 
@@ -71,6 +84,7 @@ public class EventService {
         }
     }
 
+    @Override
     @Transactional
     public void deleteEvent(String externalId) {
         try {
@@ -86,7 +100,44 @@ public class EventService {
         }
     }
 
+    @Override
     public void deleteAllEvents() {
         eventRepository.deleteAll();
+    }
+
+    @Override
+    public EventResponseDto enrollPersonIntoEvent(String eventExternalId, String personExternalId) {
+        Event event = eventRepository.findByExternalId(eventExternalId)
+                .orElseThrow(() -> new EventNotFound("event with external id " + eventExternalId + " could not be found."));
+
+        Person person = personRepository.findByExternalId(personExternalId)
+                .orElseThrow(() -> new PersonNotFound("person with external id " + personExternalId + " could not be found."));
+
+        if (event.getPersons().contains(person)) {
+            throw new EventAlreadyContainsPerson("person with external id " + personExternalId + " could not enroll multiple times in the same event.");
+        }
+
+        event.getPersons().add(person);
+        person.getEvents().add(event);
+        eventRepository.save(event);
+        personRepository.save(person);
+
+        return eventConverter.fromEntityToResponseDto(event);
+    }
+
+    @Override
+    public List<EventResponseDto> getAllEventsWherePersonEnrolled(String personExternalId) {
+        Person person = personRepository.findByExternalId(personExternalId)
+                .orElseThrow(() -> new PersonNotFound("person with external id " + personExternalId + " could not be found."));
+
+        return person.getEvents().stream().map(eventConverter::fromEntityToResponseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PersonResponseDto> getAllPersonsEnrolledIntoEvent(String eventExternalId) {
+        Event event = eventRepository.findByExternalId(eventExternalId)
+                .orElseThrow(() -> new EventNotFound("event with external id " + eventExternalId + " could not be found."));
+
+        return event.getPersons().stream().map(personConverter::fromEntityToResponseDto).collect(Collectors.toList());
     }
 }

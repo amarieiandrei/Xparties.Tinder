@@ -30,9 +30,10 @@ public class Photo {
     @Column(name = "data", nullable = false)
     private byte[] data;
 
-    @ManyToOne()
+    @OneToOne(mappedBy = "photo")
     private Event event;
 
     @ManyToOne()
+    @JoinColumn(name = "person_id", nullable = true)
     private Person person;
 }

@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Service;
+package com.demo.Xparties.Tinder.Service.Photo;
 
 import com.demo.Xparties.Tinder.Converter.PhotoConverter;
 import com.demo.Xparties.Tinder.Dto.PhotoDto.PhotoResponseDto;
@@ -18,11 +18,12 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class PhotoService {
+public class PhotoService implements IPhotoService {
 
     private final PhotoRepository photoRepository;
     private final PhotoConverter photoConverter;
 
+    @Override
     public PhotoResponseDto createPhoto(MultipartFile file) {
         try {
 
@@ -42,6 +43,7 @@ public class PhotoService {
         }
     }
 
+    @Override
     public List<PhotoResponseDto> getAllPhotos() {
         return photoRepository
                 .findAll()
@@ -50,6 +52,7 @@ public class PhotoService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public PhotoResponseDto getPhotoByExternalId(String externalId) {
         return photoConverter.fromEntityToResponseDto(
                 photoRepository.findByExternalId(externalId)
@@ -57,6 +60,7 @@ public class PhotoService {
         );
     }
 
+    @Override
     @Transactional
     public void deletePhoto(String externalId) {
         try {
@@ -72,6 +76,7 @@ public class PhotoService {
         }
     }
 
+    @Override
     public void deleteAllPhotos() {
         photoRepository.deleteAll();
     }

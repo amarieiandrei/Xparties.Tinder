@@ -43,4 +43,9 @@ public class EventExceptionHandler extends ResponseEntityExceptionHandler {
     public void handleEventNotUpdatedException(EventNotUpdated ex, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
+
+    @ExceptionHandler(value = {EventAlreadyContainsPerson.class})
+    public void handleEventAlreadyContainsPersonException(EventAlreadyContainsPerson ex, HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.ALREADY_REPORTED.value(), ex.getMessage());
+    }
 }

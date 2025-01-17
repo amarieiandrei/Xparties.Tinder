@@ -2,8 +2,7 @@ package com.demo.Xparties.Tinder.Web;
 
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonRequestDto;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
-import com.demo.Xparties.Tinder.Model.Person;
-import com.demo.Xparties.Tinder.Service.PersonService;
+import com.demo.Xparties.Tinder.Service.Person.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping("/person")
 @RestController

@@ -1,6 +1,6 @@
 package com.demo.Xparties.Tinder.Web;
 
-import com.demo.Xparties.Tinder.Service.DownloadService;
+import com.demo.Xparties.Tinder.Service.Download.DownloadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

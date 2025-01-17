@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Service;
+package com.demo.Xparties.Tinder.Service.Download;
 
 import com.demo.Xparties.Tinder.Exception.DownloadException.DownloadNotComplete;
 import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoNotFound;
@@ -13,10 +13,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class DownloadService {
+public class DownloadService implements IDownloadService {
 
     private final PhotoRepository photoRepository;
 
+    @Override
     public ResponseEntity<byte[]> downloadPhoto(String externalId) {
         try {
 

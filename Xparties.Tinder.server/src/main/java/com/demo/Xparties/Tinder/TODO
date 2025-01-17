@@ -1,5 +1,7 @@
 TODOS:
     - Take a look on TODOs in the application
+    - Springboot tutorials
+    - Relationship between tables in springboot and Hibernate and JPA
     - Need to take into consideration:
         - sanitize / sanitaze the data,
         - validate the data,
@@ -20,4 +22,5 @@ TODOS:
                 https://stackoverflow.com/a/53994470
     - Need to understand to page / pageable
     - Bean and Configuration annotations
+    - JPA Hibernate will generate queries based on the properties of the entity, super nice, wow
 

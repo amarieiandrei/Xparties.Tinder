@@ -3,8 +3,7 @@ package com.demo.Xparties.Tinder.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,13 +29,15 @@ public class Event {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @OneToMany(mappedBy = "event")
-    private List<Photo> photos;
+    @OneToOne()
+    @JoinColumn(name = "photo_id", referencedColumnName = "id", unique = true)
+    private Photo photo;
 
-    @ManyToMany
-    @JoinTable(name = "enrollments",
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "enrollments",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "person_id")
     )
-    private List<Person> persons;
+    private Set<Person> persons = new LinkedHashSet<>();
 }

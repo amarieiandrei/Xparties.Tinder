@@ -3,7 +3,9 @@ package com.demo.Xparties.Tinder.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,9 +40,9 @@ public class Person {
     @Column(name = "gender", nullable = false)
     private Character gender;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Photo> photos;
 
-    @ManyToMany(mappedBy = "persons")
-    private List<Event> events;
+    @ManyToMany(mappedBy = "persons", fetch = FetchType.EAGER)
+    private Set<Event> events = new LinkedHashSet<>();
 }

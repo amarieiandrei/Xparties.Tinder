@@ -1,7 +1,7 @@
 package com.demo.Xparties.Tinder.Web;
 
 import com.demo.Xparties.Tinder.Dto.PhotoDto.PhotoResponseDto;
-import com.demo.Xparties.Tinder.Service.PhotoService;
+import com.demo.Xparties.Tinder.Service.Photo.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,8 +2,8 @@ package com.demo.Xparties.Tinder.Web;
 
 import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
-import com.demo.Xparties.Tinder.Model.Event;
-import com.demo.Xparties.Tinder.Service.EventService;
+import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
+import com.demo.Xparties.Tinder.Service.Event.EventService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +56,22 @@ public class EventController {
     @DeleteMapping
     public void deleteAllEvents() {
         eventService.deleteAllEvents();
+    }
+
+    @PatchMapping(path = "/{eventExternalId}")
+    public EventResponseDto enrollPersonIntoEvent(@PathVariable String eventExternalId, @RequestParam String personExternalId) {
+        return eventService.enrollPersonIntoEvent(eventExternalId, personExternalId);
+    }
+
+    // TODO: Can we have pagepageable of events?
+    @GetMapping(path = "/personExternalId/{personExternalId}")
+    public List<EventResponseDto> getAllEventsWherePersonEnrolled(@PathVariable String personExternalId) {
+        return eventService.getAllEventsWherePersonEnrolled(personExternalId);
+    }
+
+    // TODO: Can we have pageable of persons?
+    @GetMapping(path = "/eventExternalId/{eventExternalId}")
+    List<PersonResponseDto> getAllPersonsEnrolledIntoEvent(@PathVariable String eventExternalId) {
+        return eventService.getAllPersonsEnrolledIntoEvent(eventExternalId);
     }
 }

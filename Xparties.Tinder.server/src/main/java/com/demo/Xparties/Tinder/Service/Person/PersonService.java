@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Service;
+package com.demo.Xparties.Tinder.Service.Person;
 
 import com.demo.Xparties.Tinder.Converter.PersonConverter;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonRequestDto;
@@ -18,11 +18,12 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class PersonService {
+public class PersonService implements IPersonService {
 
     private final PersonRepository personRepository;
     private final PersonConverter personConverter;
 
+    @Override
     public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
         try {
 
@@ -39,11 +40,13 @@ public class PersonService {
         }
     }
 
+    @Override
     public Page<PersonResponseDto> getAllPersons(Pageable pageable) {
         return personRepository.findAll(pageable)
                 .map(personConverter::fromEntityToResponseDto);
     }
 
+    @Override
     public PersonResponseDto getPersonByExternalId(String externalId) {
         return personConverter.fromEntityToResponseDto(
                 personRepository.findByExternalId(externalId)
@@ -51,6 +54,7 @@ public class PersonService {
         );
     }
 
+    @Override
     public PersonResponseDto updatePerson(String externalId, PersonRequestDto updatedPersonRequestDto) {
         try {
 
@@ -74,6 +78,7 @@ public class PersonService {
         }
     }
 
+    @Override
     @Transactional
     public void deletePerson(String externalId) {
         try {
@@ -89,6 +94,7 @@ public class PersonService {
         }
     }
 
+    @Override
     public void deleteAllPersons() {
         personRepository.deleteAll();
     }
