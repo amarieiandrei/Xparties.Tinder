@@ -1,0 +1,478 @@
+{
+	"info": {
+		"_postman_id": "21bbabe2-5891-43d2-a215-db6b2c19124f",
+		"name": "Xparties.Tinder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21688412"
+	},
+	"item": [
+		{
+			"name": "Event",
+			"item": [
+				{
+					"name": "getAllEvents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getEventByExternalId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/13c9dee6-fab9-40dc-9806-f57c81e52576",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"13c9dee6-fab9-40dc-9806-f57c81e52576"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createEvent",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"event-name-test-1\",\r\n    \"date\": \"2025-01-11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEvent",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"maliakademy\",\r\n    \"date\": \"2025-01-11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event/1cad0ceb-3ee0-4907-8a0f-5b9bb260538a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"1cad0ceb-3ee0-4907-8a0f-5b9bb260538a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEvent",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/c02ef304-7c23-48e9-a2ad-ad4a6173c996",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"c02ef304-7c23-48e9-a2ad-ad4a6173c996"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAllEvents",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addPersonToEvent",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"personExternalId\": \"5312fda3-7f11-4861-bf49-c4d1a4f2ab9d\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/event/378112d2-420c-4dd1-a964-6a0a8974f578?personExternalId=78811413-a6f9-43bb-8fd1-33219f7a388f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"378112d2-420c-4dd1-a964-6a0a8974f578"
+							],
+							"query": [
+								{
+									"key": "personExternalId",
+									"value": "78811413-a6f9-43bb-8fd1-33219f7a388f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllEventsWherePersonEnrolled",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/personExternalId/6ecb731d-8bab-44db-8b22-82fe5b840979s",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"personExternalId",
+								"6ecb731d-8bab-44db-8b22-82fe5b840979s"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllPersonsEnrolledIntoEvent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/event/eventExternalId/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"event",
+								"eventExternalId",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Person",
+			"item": [
+				{
+					"name": "getAllPersons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/person/persons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person",
+								"persons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonByExternalId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/person/a1977eff-1cc9-4f39-b2ec-fbaf7e609090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person",
+								"a1977eff-1cc9-4f39-b2ec-fbaf7e609090"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPerson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test1@test.com\",\r\n    \"firstName\": \"Andrei\",\r\n    \"lastName\": \"Amariei\",\r\n    \"age\": 24,\r\n    \"gender\": \"M\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePerson",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"maliakademy-test@maliakademy.ro\",\r\n    \"firstName\": \"malik1\",\r\n    \"lastName\": \"malik2\",\r\n    \"age\": 24,\r\n    \"gender\": \"T\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/person/a1977eff-1cc9-4f39-b2ec-fbaf7e609090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person",
+								"a1977eff-1cc9-4f39-b2ec-fbaf7e609090"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePerson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/person/a1977eff-1cc9-4f39-b2ec-fbaf7e609090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person",
+								"a1977eff-1cc9-4f39-b2ec-fbaf7e609090"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAllPersons",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/person",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Photo",
+			"item": [
+				{
+					"name": "getAllPhotos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/photo/photos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPhotoByExternalId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/photo/b49d79c1-e4d9-47d0-9349-7c51bd3637ba",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo",
+								"b49d79c1-e4d9-47d0-9349-7c51bd3637ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePhoto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/photo/b49d79c1-e4d9-47d0-9349-7c51bd3637ba",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo",
+								"b49d79c1-e4d9-47d0-9349-7c51bd3637ba"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAllPhotos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/photo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"photo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Download",
+			"item": [
+				{
+					"name": "downloadPhoto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/download/afef3686-6058-4784-b2bd-203e31ec3d91",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"download",
+								"afef3686-6058-4784-b2bd-203e31ec3d91"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
