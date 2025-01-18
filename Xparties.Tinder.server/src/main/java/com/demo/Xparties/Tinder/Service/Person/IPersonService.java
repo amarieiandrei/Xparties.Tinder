@@ -13,4 +13,5 @@ public interface IPersonService {
     PersonResponseDto updatePerson(String externalId, PersonRequestDto updatedPersonRequestDto);
     void deletePerson(String externalId);
     void deleteAllPersons();
+    PersonResponseDto addPhotoToPerson(String personExternalId, String photoExternalId);
 }

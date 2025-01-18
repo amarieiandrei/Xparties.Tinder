@@ -1,6 +1,5 @@
 package com.demo.Xparties.Tinder.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 

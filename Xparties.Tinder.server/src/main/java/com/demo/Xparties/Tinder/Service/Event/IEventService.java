@@ -19,4 +19,5 @@ public interface IEventService {
     EventResponseDto enrollPersonIntoEvent(String eventExternalId, String personExternalId);
     List<EventResponseDto> getAllEventsWherePersonEnrolled(String personExternalId);
     List<PersonResponseDto> getAllPersonsEnrolledIntoEvent(String eventExternalId);
+    EventResponseDto addPhotoToEvent(String eventExternalId, String photoExternalId);
 }

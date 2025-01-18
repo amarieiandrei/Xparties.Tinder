@@ -4,8 +4,13 @@ import com.demo.Xparties.Tinder.Converter.PersonConverter;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonRequestDto;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
 import com.demo.Xparties.Tinder.Exception.PersonException.*;
+import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoAlreadyAssignedToAPerson;
+import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoAlreadyAssignedToAnEvent;
+import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoNotFound;
 import com.demo.Xparties.Tinder.Model.Person;
+import com.demo.Xparties.Tinder.Model.Photo;
 import com.demo.Xparties.Tinder.Repository.PersonRepository;
+import com.demo.Xparties.Tinder.Repository.PhotoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +27,7 @@ public class PersonService implements IPersonService {
 
     private final PersonRepository personRepository;
     private final PersonConverter personConverter;
+    private final PhotoRepository photoRepository;
 
     @Override
     public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
@@ -59,16 +65,16 @@ public class PersonService implements IPersonService {
         try {
 
             if (personRepository.existsByExternalId(externalId)) {
-                    Person person = personRepository.findByExternalId(externalId).get();
-                    Person updatedPerson = personConverter.fromRequestDtoToEntity(updatedPersonRequestDto);
+                Person person = personRepository.findByExternalId(externalId).get();
+                Person updatedPerson = personConverter.fromRequestDtoToEntity(updatedPersonRequestDto);
 
-                    person.setEmail(updatedPerson.getEmail());
-                    person.setFirstName(updatedPerson.getFirstName());
-                    person.setLastName(updatedPerson.getLastName());
-                    person.setAge(updatedPerson.getAge());
-                    person.setGender(updatedPerson.getGender());
+                person.setEmail(updatedPerson.getEmail());
+                person.setFirstName(updatedPerson.getFirstName());
+                person.setLastName(updatedPerson.getLastName());
+                person.setAge(updatedPerson.getAge());
+                person.setGender(updatedPerson.getGender());
 
-                    return personConverter.fromEntityToResponseDto(personRepository.save(person));
+                return personConverter.fromEntityToResponseDto(personRepository.save(person));
             } else {
                 throw new PersonNotFound("person with external id " + externalId + " could not be found.");
             }
@@ -97,5 +103,26 @@ public class PersonService implements IPersonService {
     @Override
     public void deleteAllPersons() {
         personRepository.deleteAll();
+    }
+
+    @Override
+    public PersonResponseDto addPhotoToPerson(String personExternalId, String photoExternalId) {
+        Person person = personRepository.findByExternalId(personExternalId)
+                .orElseThrow(() -> new PersonNotFound("person with external id " + personExternalId + " could not be found."));
+
+        Photo photo = photoRepository.findByExternalId(photoExternalId)
+                .orElseThrow(() -> new PhotoNotFound("photo with external id " + photoExternalId + " could not be found."));
+
+        if (photo.getEvent() == null) {
+            person.getPhotos().add(photo);
+            photo.setPerson(person);
+            personRepository.save(person);
+            photoRepository.save(photo);
+        } else {
+            // TODO: Refactor the error
+            throw new PhotoAlreadyAssignedToAnEvent("photo with external id " + photoExternalId + " already assigned to an event and could not have multiple relationships since cascade all will create confusion.");
+        }
+
+        return personConverter.fromEntityToResponseDto(person);
     }
 }

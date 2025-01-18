@@ -53,4 +53,9 @@ public class PersonController {
     public void deleteAllPersons() {
         personService.deleteAllPersons();
     }
+
+    @PatchMapping( path = "/{personExternalId}")
+    public PersonResponseDto addPhotoToPerson(@PathVariable String personExternalId, @RequestParam String photoExternalId) {
+        return personService.addPhotoToPerson(personExternalId, photoExternalId);
+    }
 }

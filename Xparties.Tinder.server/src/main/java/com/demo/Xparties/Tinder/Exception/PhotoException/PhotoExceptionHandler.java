@@ -1,6 +1,5 @@
 package com.demo.Xparties.Tinder.Exception.PhotoException;
 
-import com.demo.Xparties.Tinder.Web.PhotoController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -11,7 +10,7 @@ import jakarta.validation.ConstraintViolationException;
 
 import java.io.IOException;
 
-@RestControllerAdvice(assignableTypes = PhotoController.class)
+@RestControllerAdvice()
 public class PhotoExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {ConstraintViolationException.class})
@@ -42,5 +41,15 @@ public class PhotoExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {PhotoNotUpdated.class})
     public void handlePhotoNotUpdatedException(PhotoNotUpdated ex, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(value = {PhotoAlreadyAssignedToAPerson.class})
+    public void handlePhotoAlreadyAssignedToAPersonException(PhotoAlreadyAssignedToAPerson ex, HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.ALREADY_REPORTED.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(value = {PhotoAlreadyAssignedToAnEvent.class})
+    public void handlePhotoAlreadyAssignedToAnEventException(PhotoAlreadyAssignedToAnEvent ex, HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.ALREADY_REPORTED.value(), ex.getMessage());
     }
 }

@@ -74,4 +74,9 @@ public class EventController {
     List<PersonResponseDto> getAllPersonsEnrolledIntoEvent(@PathVariable String eventExternalId) {
         return eventService.getAllPersonsEnrolledIntoEvent(eventExternalId);
     }
+
+    @PatchMapping(path = "/{eventExternalId}/photo")
+    public EventResponseDto addPhotoToEvent(@PathVariable String eventExternalId, @RequestParam String photoExternalId) {
+        return eventService.addPhotoToEvent(eventExternalId, photoExternalId);
+    }
 }

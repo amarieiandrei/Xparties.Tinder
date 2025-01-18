@@ -29,7 +29,7 @@ public class Event {
     @Column(name = "date", nullable = false)
     private Date date;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "photo_id", referencedColumnName = "id", unique = true)
     private Photo photo;
 

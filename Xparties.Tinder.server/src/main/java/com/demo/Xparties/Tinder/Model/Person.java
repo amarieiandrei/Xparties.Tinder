@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -41,7 +40,7 @@ public class Person {
     private Character gender;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    private List<Photo> photos;
+    private Set<Photo> photos = new LinkedHashSet<>();
 
     @ManyToMany(mappedBy = "persons", fetch = FetchType.EAGER)
     private Set<Event> events = new LinkedHashSet<>();

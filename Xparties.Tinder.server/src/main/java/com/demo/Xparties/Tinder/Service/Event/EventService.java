@@ -7,10 +7,14 @@ import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
 import com.demo.Xparties.Tinder.Exception.EventException.*;
 import com.demo.Xparties.Tinder.Exception.PersonException.PersonNotFound;
+import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoAlreadyAssignedToAPerson;
+import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoNotFound;
 import com.demo.Xparties.Tinder.Model.Event;
 import com.demo.Xparties.Tinder.Model.Person;
+import com.demo.Xparties.Tinder.Model.Photo;
 import com.demo.Xparties.Tinder.Repository.EventRepository;
 import com.demo.Xparties.Tinder.Repository.PersonRepository;
+import com.demo.Xparties.Tinder.Repository.PhotoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,7 @@ public class EventService implements IEventService {
     private final EventConverter eventConverter;
     private final PersonRepository personRepository;
     private final PersonConverter personConverter;
+    private final PhotoRepository photoRepository;
 
     @Override
     public EventResponseDto createEvent(EventRequestDto eventRequestDto) {
@@ -139,5 +144,26 @@ public class EventService implements IEventService {
                 .orElseThrow(() -> new EventNotFound("event with external id " + eventExternalId + " could not be found."));
 
         return event.getPersons().stream().map(personConverter::fromEntityToResponseDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public EventResponseDto addPhotoToEvent(String eventExternalId, String photoExternalId) {
+        Event event = eventRepository.findByExternalId(eventExternalId)
+                .orElseThrow(() -> new EventNotFound("event with external id " + eventExternalId + " could not be found."));
+
+        Photo photo = photoRepository.findByExternalId(photoExternalId)
+                .orElseThrow(() -> new PhotoNotFound("photo with external id " + photoExternalId + " could not be found."));
+
+        if (photo.getPerson() == null) {
+            event.setPhoto(photo);
+            photo.setEvent(event);
+            eventRepository.save(event);
+            photoRepository.save(photo);
+        } else {
+            // TODO: Refactor the error
+            throw new PhotoAlreadyAssignedToAPerson("photo with external id " + photoExternalId + " already assigned to a person and could not have multiple relationships since cascade all will create confusion.");
+        }
+
+        return eventConverter.fromEntityToResponseDto(event);
     }
 }

@@ -1,6 +1,5 @@
 package com.demo.Xparties.Tinder.Exception.PersonException;
 
-import com.demo.Xparties.Tinder.Web.PersonController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
