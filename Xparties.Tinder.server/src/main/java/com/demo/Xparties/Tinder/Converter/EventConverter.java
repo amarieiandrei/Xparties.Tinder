@@ -3,13 +3,11 @@ package com.demo.Xparties.Tinder.Converter;
 
 import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
-import com.demo.Xparties.Tinder.Model.Event;
+import com.demo.Xparties.Tinder.Model.Entity.Event;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.stream.Collectors;
 
 @Configuration
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))

@@ -1,5 +1,6 @@
 package com.demo.Xparties.Tinder.Dto.PersonDto;
 
+import com.demo.Xparties.Tinder.Model.Enums.PersonGender;
 import jakarta.validation.Valid;
 import lombok.*;
 
@@ -21,10 +22,7 @@ public class PersonResponseDto {
 
     private Integer age;
 
-    private Character gender;
+    private PersonGender gender;
 
     // TODO: create password important for Person
-
-    // TODO: One to many relationship
-    //    private List<Photo> photos;
 }

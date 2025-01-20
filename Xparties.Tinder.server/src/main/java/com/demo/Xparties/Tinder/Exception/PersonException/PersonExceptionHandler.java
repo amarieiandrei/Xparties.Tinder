@@ -42,4 +42,9 @@ public class PersonExceptionHandler extends ResponseEntityExceptionHandler {
     public void handlePersonNotUpdatedException(PersonNotUpdated ex, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
     }
+
+    @ExceptionHandler(value = {PersonNotEnrolledIntoEvent.class})
+    public void handlePersonNotEnrolledIntoEventException(PersonNotEnrolledIntoEvent ex, HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+    }
 }

@@ -11,7 +11,7 @@ import jakarta.validation.ConstraintViolationException;
 
 import java.io.IOException;
 
-@RestControllerAdvice(assignableTypes = EventController.class)
+@RestControllerAdvice()
 public class EventExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {ConstraintViolationException.class})

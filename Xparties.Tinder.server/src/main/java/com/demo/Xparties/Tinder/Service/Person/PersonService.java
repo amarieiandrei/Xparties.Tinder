@@ -3,12 +3,15 @@ package com.demo.Xparties.Tinder.Service.Person;
 import com.demo.Xparties.Tinder.Converter.PersonConverter;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonRequestDto;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
+import com.demo.Xparties.Tinder.Exception.EventException.EventNotFound;
 import com.demo.Xparties.Tinder.Exception.PersonException.*;
-import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoAlreadyAssignedToAPerson;
 import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoAlreadyAssignedToAnEvent;
 import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoNotFound;
-import com.demo.Xparties.Tinder.Model.Person;
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Model.Entity.Event;
+import com.demo.Xparties.Tinder.Model.Entity.Person;
+import com.demo.Xparties.Tinder.Model.Entity.Photo;
+import com.demo.Xparties.Tinder.Model.Enums.PersonGender;
+import com.demo.Xparties.Tinder.Repository.EventRepository;
 import com.demo.Xparties.Tinder.Repository.PersonRepository;
 import com.demo.Xparties.Tinder.Repository.PhotoRepository;
 import jakarta.transaction.Transactional;
@@ -28,6 +31,7 @@ public class PersonService implements IPersonService {
     private final PersonRepository personRepository;
     private final PersonConverter personConverter;
     private final PhotoRepository photoRepository;
+    private final EventRepository eventRepository;
 
     @Override
     public PersonResponseDto createPerson(PersonRequestDto personRequestDto) {
@@ -124,5 +128,26 @@ public class PersonService implements IPersonService {
         }
 
         return personConverter.fromEntityToResponseDto(person);
+    }
+
+    @Override
+    public Page<PersonResponseDto> getAllOppositeGenderPersonsAttendingSameEvent(String personExternalId, String eventExternalId, Pageable pageable) {
+        Person person = personRepository.findByExternalId(personExternalId)
+                .orElseThrow(() -> new PersonNotFound("person with external id " + personExternalId + " could not be found."));
+
+        if ( !eventRepository.existsByExternalId(eventExternalId) ) {
+            throw new EventNotFound("event with external id " + eventExternalId + " could not be found.");
+        }
+
+        if ( !personRepository.isPersonEnrolledIntoEvent(personExternalId, eventExternalId) ) {
+            throw new PersonNotEnrolledIntoEvent("person it is not enrolled into event.");
+        }
+
+        // Example of a NON-STATIC function inside of an enum which operates on an instance :)
+        PersonGender oppositeGender = person.getGender().getOppositeGender();
+
+        // TODO: This approach can cause N+1 problem which is important to avoid, try to -> Fetch attendees by gender at the database level!
+        return personRepository.getAllPersonsByGenderAttendingSameEvent(oppositeGender, eventExternalId, pageable)
+                .map(personConverter::fromEntityToResponseDto);
     }
 }

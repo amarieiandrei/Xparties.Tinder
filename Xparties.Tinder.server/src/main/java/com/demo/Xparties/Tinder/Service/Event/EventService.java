@@ -9,9 +9,10 @@ import com.demo.Xparties.Tinder.Exception.EventException.*;
 import com.demo.Xparties.Tinder.Exception.PersonException.PersonNotFound;
 import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoAlreadyAssignedToAPerson;
 import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoNotFound;
-import com.demo.Xparties.Tinder.Model.Event;
-import com.demo.Xparties.Tinder.Model.Person;
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Model.Entity.Event;
+import com.demo.Xparties.Tinder.Model.Entity.Person;
+import com.demo.Xparties.Tinder.Model.Entity.Photo;
+import com.demo.Xparties.Tinder.Model.Enums.EventCategory;
 import com.demo.Xparties.Tinder.Repository.EventRepository;
 import com.demo.Xparties.Tinder.Repository.PersonRepository;
 import com.demo.Xparties.Tinder.Repository.PhotoRepository;
@@ -78,6 +79,7 @@ public class EventService implements IEventService {
 
                 event.setName(updatedEvent.getName());
                 event.setDate(updatedEvent.getDate());
+                event.setCategory(updatedEvent.getCategory());
 
                 return eventConverter.fromEntityToResponseDto(eventRepository.save(event));
             } else {
@@ -165,5 +167,11 @@ public class EventService implements IEventService {
         }
 
         return eventConverter.fromEntityToResponseDto(event);
+    }
+
+    @Override
+    public Page<EventResponseDto> getAllEventsByCategory(EventCategory category, Pageable pageable) {
+        return eventRepository.getAllEventsByCategory(category, pageable)
+                .map(eventConverter::fromEntityToResponseDto);
     }
 }

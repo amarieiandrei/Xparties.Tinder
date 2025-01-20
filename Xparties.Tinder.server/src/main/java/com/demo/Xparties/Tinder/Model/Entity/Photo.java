@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Model;
+package com.demo.Xparties.Tinder.Model.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

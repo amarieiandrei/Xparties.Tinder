@@ -23,4 +23,6 @@ TODOS:
     - Need to understand to page / pageable
     - Bean and Configuration annotations
     - JPA Hibernate will generate queries based on the properties of the entity, super nice, wow
+    - You can investigate more about pagination and the WARN message when doing an operation which requires pagination.
+    - N + 1 problem when fetching data
 

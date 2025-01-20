@@ -1,6 +1,6 @@
 package com.demo.Xparties.Tinder.Repository;
 
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Model.Entity.Photo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

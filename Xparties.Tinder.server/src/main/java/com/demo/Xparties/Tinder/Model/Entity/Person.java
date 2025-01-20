@@ -1,5 +1,6 @@
-package com.demo.Xparties.Tinder.Model;
+package com.demo.Xparties.Tinder.Model.Entity;
 
+import com.demo.Xparties.Tinder.Model.Enums.PersonGender;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,7 +38,8 @@ public class Person {
     private Integer age;
 
     @Column(name = "gender", nullable = false)
-    private Character gender;
+    @Enumerated(EnumType.STRING)
+    private PersonGender gender;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private Set<Photo> photos = new LinkedHashSet<>();

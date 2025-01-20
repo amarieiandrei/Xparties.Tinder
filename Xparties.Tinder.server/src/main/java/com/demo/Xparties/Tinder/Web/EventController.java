@@ -3,6 +3,7 @@ package com.demo.Xparties.Tinder.Web;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
+import com.demo.Xparties.Tinder.Model.Enums.EventCategory;
 import com.demo.Xparties.Tinder.Service.Event.EventService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -78,5 +79,10 @@ public class EventController {
     @PatchMapping(path = "/{eventExternalId}/photo")
     public EventResponseDto addPhotoToEvent(@PathVariable String eventExternalId, @RequestParam String photoExternalId) {
         return eventService.addPhotoToEvent(eventExternalId, photoExternalId);
+    }
+
+    @GetMapping(path = "/events/{category}")
+    public Page<EventResponseDto> getAllEventsByCategory(@PathVariable EventCategory category, Pageable pageable) {
+        return eventService.getAllEventsByCategory(category, pageable);
     }
 }

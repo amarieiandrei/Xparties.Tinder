@@ -3,6 +3,7 @@ package com.demo.Xparties.Tinder.Service.Event;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
+import com.demo.Xparties.Tinder.Model.Enums.EventCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,4 +21,5 @@ public interface IEventService {
     List<EventResponseDto> getAllEventsWherePersonEnrolled(String personExternalId);
     List<PersonResponseDto> getAllPersonsEnrolledIntoEvent(String eventExternalId);
     EventResponseDto addPhotoToEvent(String eventExternalId, String photoExternalId);
+    Page<EventResponseDto> getAllEventsByCategory(EventCategory category, Pageable pageable);
 }

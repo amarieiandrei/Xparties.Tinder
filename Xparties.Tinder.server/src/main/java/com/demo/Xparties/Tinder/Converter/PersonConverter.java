@@ -2,7 +2,7 @@ package com.demo.Xparties.Tinder.Converter;
 
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonRequestDto;
 import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
-import com.demo.Xparties.Tinder.Model.Person;
+import com.demo.Xparties.Tinder.Model.Entity.Person;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

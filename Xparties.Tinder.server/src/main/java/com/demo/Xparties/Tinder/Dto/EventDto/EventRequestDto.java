@@ -1,5 +1,6 @@
 package com.demo.Xparties.Tinder.Dto.EventDto;
 
+import com.demo.Xparties.Tinder.Model.Enums.EventCategory;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -21,4 +22,7 @@ public class EventRequestDto {
 
     @NotNull
     private Date date;
+
+    @NotNull
+    private EventCategory category;
 }

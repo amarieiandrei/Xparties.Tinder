@@ -1,5 +1,6 @@
 package com.demo.Xparties.Tinder.Dto.EventDto;
 
+import com.demo.Xparties.Tinder.Model.Enums.EventCategory;
 import lombok.*;
 
 import java.util.Date;
@@ -17,6 +18,5 @@ public class EventResponseDto {
 
     private Date date;
 
-//    TODO: understand
-//    private Set<PersonResponseDto> personSet;
+    private EventCategory category;
 }

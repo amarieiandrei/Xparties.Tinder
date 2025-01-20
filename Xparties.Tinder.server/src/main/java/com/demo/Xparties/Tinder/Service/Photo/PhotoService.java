@@ -3,7 +3,7 @@ package com.demo.Xparties.Tinder.Service.Photo;
 import com.demo.Xparties.Tinder.Converter.PhotoConverter;
 import com.demo.Xparties.Tinder.Dto.PhotoDto.PhotoResponseDto;
 import com.demo.Xparties.Tinder.Exception.PhotoException.*;
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Model.Entity.Photo;
 import com.demo.Xparties.Tinder.Repository.PhotoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

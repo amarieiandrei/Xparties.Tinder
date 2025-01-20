@@ -1,8 +1,10 @@
-package com.demo.Xparties.Tinder;
+package com.demo.Xparties.Tinder.Util;
 
-import com.demo.Xparties.Tinder.Model.Event;
-import com.demo.Xparties.Tinder.Model.Person;
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Model.Entity.Event;
+import com.demo.Xparties.Tinder.Model.Entity.Person;
+import com.demo.Xparties.Tinder.Model.Entity.Photo;
+import com.demo.Xparties.Tinder.Model.Enums.EventCategory;
+import com.demo.Xparties.Tinder.Model.Enums.PersonGender;
 import com.demo.Xparties.Tinder.Repository.EventRepository;
 import com.demo.Xparties.Tinder.Repository.PersonRepository;
 import com.demo.Xparties.Tinder.Repository.PhotoRepository;
@@ -122,19 +124,19 @@ public class DataSeeder {
 
 
     private void createPersons() {
-        createPerson("John", "Doe", "john.doe@example.com", 30, 'M');
-        createPerson("Jane", "Smith", "jane.smith@example.com", 25, 'F');
-        createPerson("Andrei", "Amariei", "andrei.amariei.1116@hotmail.com", 24, 'M');
-        createPerson("Alex-Justin", "Amariei", "amarieialexjustin@gmail.com", 19, 'M');
-        createPerson("Steve", "Dorian", "steve-dorian@gmail.com", 45, 'M');
-        createPerson("Mikey", "Dorian", "mikey.hash@yahoo.com", 60, 'M');
-        createPerson("Stones", "Johny", "stonesjohny@gmail.com", 27, 'M');
-        createPerson("Messi", "Lionel", "messi25@gmail.com", 33, 'M');
-        createPerson("Ronaldo", "Cristiano", "cristiano16@hotmail.com", 37, 'M');
-        createPerson("Maria", "Dan", "dandan25@yahoo.com", 18, 'F');
+        createPerson("John", "Doe", "john.doe@example.com", 30, PersonGender.M);
+        createPerson("Jane", "Smith", "jane.smith@example.com", 25, PersonGender.F);
+        createPerson("Andrei", "Amariei", "andrei.amariei.1116@hotmail.com", 24, PersonGender.M);
+        createPerson("Alex-Justin", "Amariei", "amarieialexjustin@gmail.com", 19, PersonGender.M);
+        createPerson("Steve", "Dorian", "steve-dorian@gmail.com", 45, PersonGender.M);
+        createPerson("Mikey", "Dorian", "mikey.hash@yahoo.com", 60, PersonGender.M);
+        createPerson("Stones", "Johny", "stonesjohny@gmail.com", 27, PersonGender.M);
+        createPerson("Messi", "Lionel", "messi25@gmail.com", 33, PersonGender.M);
+        createPerson("Ronaldo", "Cristiano", "cristiano16@hotmail.com", 37, PersonGender.M);
+        createPerson("Maria", "Dan", "dandan25@yahoo.com", 18, PersonGender.F);
     }
 
-    private void createPerson(String firstName, String lastName, String email, int age, Character gender) {
+    private void createPerson(String firstName, String lastName, String email, int age, PersonGender gender) {
         Person person = new Person();
         person.setExternalId(UUID.randomUUID().toString());
         person.setFirstName(firstName);
@@ -178,23 +180,24 @@ public class DataSeeder {
     }
 
     private void createEvents() {
-        createEvent("Spring Boot Workshop", randomDate());
-        createEvent("Angular Camp", randomDate());
-        createEvent("React Festival", randomDate());
-        createEvent("Untold", randomDate());
-        createEvent("Beach Please", randomDate());
-        createEvent("Neversea", randomDate());
-        createEvent("Festivalul Muzicii Clasice", randomDate());
-        createEvent("Festivalul Tineretului", randomDate());
-        createEvent("Cupa Romaniei", randomDate());
-        createEvent("Super Liga Programatorilor", randomDate());
+        createEvent("Spring Boot Workshop", randomDate(), EventCategory.TECH);
+        createEvent("Angular Camp", randomDate(), EventCategory.TECH);
+        createEvent("React Festival", randomDate(), EventCategory.TECH);
+        createEvent("Untold", randomDate(), EventCategory.MUSIC);
+        createEvent("Beach Please", randomDate(), EventCategory.MUSIC);
+        createEvent("Neversea", randomDate(), EventCategory.MUSIC);
+        createEvent("Festivalul Muzicii Clasice", randomDate(), EventCategory.MUSIC);
+        createEvent("Festivalul Tineretului", randomDate(), EventCategory.MAINSTREAM);
+        createEvent("Cupa Romaniei", randomDate(), EventCategory.SPORTS);
+        createEvent("Super Liga Programatorilor", randomDate(), EventCategory.SPORTS);
     }
 
-    private void createEvent(String name, Date date) {
+    private void createEvent(String name, Date date, EventCategory category) {
         Event event = new Event();
         event.setExternalId(UUID.randomUUID().toString());
         event.setName(name);
         event.setDate(date);
+        event.setCategory(category);
         eventRepository.save(event);
     }
 

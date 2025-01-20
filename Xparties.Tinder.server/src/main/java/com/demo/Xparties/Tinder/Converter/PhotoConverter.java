@@ -1,7 +1,7 @@
 package com.demo.Xparties.Tinder.Converter;
 
 import com.demo.Xparties.Tinder.Dto.PhotoDto.PhotoResponseDto;
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Model.Entity.Photo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

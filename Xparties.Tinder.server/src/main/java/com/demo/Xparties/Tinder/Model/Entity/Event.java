@@ -1,5 +1,6 @@
-package com.demo.Xparties.Tinder.Model;
+package com.demo.Xparties.Tinder.Model.Entity;
 
+import com.demo.Xparties.Tinder.Model.Enums.EventCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,10 @@ public class Event {
 
     @Column(name = "date", nullable = false)
     private Date date;
+
+    @Column(name = "category", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private EventCategory category;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "photo_id", referencedColumnName = "id", unique = true)

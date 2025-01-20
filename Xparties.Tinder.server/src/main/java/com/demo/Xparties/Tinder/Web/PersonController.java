@@ -58,4 +58,9 @@ public class PersonController {
     public PersonResponseDto addPhotoToPerson(@PathVariable String personExternalId, @RequestParam String photoExternalId) {
         return personService.addPhotoToPerson(personExternalId, photoExternalId);
     }
+
+    @GetMapping( path = "/{personExternalId}/event")
+    public Page<PersonResponseDto> getAllOppositeGenderPersonsAttendingSameEvent(@PathVariable String personExternalId, @RequestParam String eventExternalId, Pageable pageable) {
+        return personService.getAllOppositeGenderPersonsAttendingSameEvent(personExternalId, eventExternalId, pageable);
+    }
 }

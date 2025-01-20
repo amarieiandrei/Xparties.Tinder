@@ -2,7 +2,7 @@ package com.demo.Xparties.Tinder.Service.Download;
 
 import com.demo.Xparties.Tinder.Exception.DownloadException.DownloadNotComplete;
 import com.demo.Xparties.Tinder.Exception.PhotoException.PhotoNotFound;
-import com.demo.Xparties.Tinder.Model.Photo;
+import com.demo.Xparties.Tinder.Model.Entity.Photo;
 import com.demo.Xparties.Tinder.Repository.PhotoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -14,4 +14,5 @@ public interface IPersonService {
     void deletePerson(String externalId);
     void deleteAllPersons();
     PersonResponseDto addPhotoToPerson(String personExternalId, String photoExternalId);
+    Page<PersonResponseDto> getAllOppositeGenderPersonsAttendingSameEvent(String personExternalId, String eventExternalId, Pageable pageable);
 }
