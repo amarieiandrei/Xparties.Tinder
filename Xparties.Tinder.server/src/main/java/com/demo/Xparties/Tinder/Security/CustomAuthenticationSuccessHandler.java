@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder;
+package com.demo.Xparties.Tinder.Security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

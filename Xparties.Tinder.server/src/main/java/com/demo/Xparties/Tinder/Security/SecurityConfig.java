@@ -1,6 +1,5 @@
-package com.demo.Xparties.Tinder.Config;
+package com.demo.Xparties.Tinder.Security;
 
-import com.demo.Xparties.Tinder.CustomAuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

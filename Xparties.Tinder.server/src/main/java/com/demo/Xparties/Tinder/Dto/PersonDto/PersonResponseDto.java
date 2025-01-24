@@ -23,6 +23,4 @@ public class PersonResponseDto {
     private Integer age;
 
     private PersonGender gender;
-
-    // TODO: create password important for Person
 }
