@@ -9,6 +9,7 @@ import lombok.*;
 @Setter
 public class MatchResponseDto {
 
+    // TODO: refactoring ( I am sending ids from databases only for testing purpose, I should change back with external ids :) )
     private Long personId;
 
     private Long targetPersonId;

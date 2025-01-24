@@ -2,13 +2,15 @@ package com.demo.Xparties.Tinder.Web;
 
 import com.demo.Xparties.Tinder.Dto.MatchDto.MatchRequestDto;
 import com.demo.Xparties.Tinder.Dto.MatchDto.MatchResponseDto;
+import com.demo.Xparties.Tinder.Dto.PersonDto.PersonResponseDto;
 import com.demo.Xparties.Tinder.Service.Match.MatchService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/match")
 @RestController
@@ -17,8 +19,14 @@ public class MatchController {
 
     private final MatchService matchService;
 
-    @PostMapping()
-    public MatchResponseDto createMatch(@RequestBody MatchRequestDto matchRequestDto) {
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public MatchResponseDto createMatch(@Valid @RequestBody MatchRequestDto matchRequestDto) {
         return matchService.createMatch(matchRequestDto);
+    }
+
+    @GetMapping(path = "/{eventExternalId}/persons")
+    public Page<PersonResponseDto> getAllMatchedPersonsByEvent(@PathVariable String eventExternalId, Pageable pageable) {
+        return matchService.getAllMatchedPersonsByEvent(eventExternalId, pageable);
     }
 }

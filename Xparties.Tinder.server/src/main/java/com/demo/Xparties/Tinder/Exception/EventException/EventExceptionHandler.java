@@ -1,6 +1,5 @@
 package com.demo.Xparties.Tinder.Exception.EventException;
 
-import com.demo.Xparties.Tinder.Web.EventController;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

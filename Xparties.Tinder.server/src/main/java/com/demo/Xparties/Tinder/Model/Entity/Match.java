@@ -32,4 +32,7 @@ public class Match {
 
     @Column(name = "smash", nullable = false)
     private Boolean smash;
+
+    @Column(name = "is_match", nullable = false)
+    private Boolean isMatch;
 }

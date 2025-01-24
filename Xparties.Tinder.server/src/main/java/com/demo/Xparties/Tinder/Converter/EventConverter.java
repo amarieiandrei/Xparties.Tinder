@@ -1,6 +1,5 @@
 package com.demo.Xparties.Tinder.Converter;
 
-
 import com.demo.Xparties.Tinder.Dto.EventDto.EventRequestDto;
 import com.demo.Xparties.Tinder.Dto.EventDto.EventResponseDto;
 import com.demo.Xparties.Tinder.Model.Entity.Event;
