@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
-
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HlmButtonDirective],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  imports: [RouterOutlet],
+  template: `<router-outlet></router-outlet>`,
 })
+// The container where Angular loads all the components based on the SSR or CSR routes ( router-outlet, a directive for this scope )
 export class AppComponent {}
