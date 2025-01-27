@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Xparties-Tinder-frontend": {
+    "Xparties.Tinder-Frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/xparties-tinder-frontend",
+            "outputPath": "dist/xparties.tinder-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Xparties-Tinder-frontend:build:production"
+              "buildTarget": "Xparties.Tinder-Frontend:build:production"
             },
             "development": {
-              "buildTarget": "Xparties-Tinder-frontend:build:development"
+              "buildTarget": "Xparties.Tinder-Frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
