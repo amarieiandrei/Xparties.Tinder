@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
-// directives
-import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
+import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
 
 @Component({
   selector: 'app-login',
