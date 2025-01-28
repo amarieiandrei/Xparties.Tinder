@@ -26,4 +26,6 @@ TODOS:
     - You can investigate more about pagination and the WARN message when doing an operation which requires pagination.
     - N + 1 problem when fetching data
     - Implement swagger for open API support, for client to have informations about requests
+    - What is important Docker? Understand Docker
+    - What is GitHub actions?
 
