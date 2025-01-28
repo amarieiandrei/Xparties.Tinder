@@ -1,7 +1,7 @@
 FROM openjdk:23-jdk AS build
 COPY . .
 RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw package -DskipTests
 
 FROM openjdk:23-jdk-slim
 COPY --from=build /target/Xparties.Tinder-0.0.1-SNAPSHOT.jar Xparties.Tinder.jar
