@@ -1,4 +1,4 @@
-FROM nginx AS build
+FROM maven:3.8.5-openjdk-23 AS build
 COPY ..
 RUN mvn clean package -DskipTests
 
