@@ -1,8 +1,8 @@
-FROM maven:3.8.5-openjdk-17 AS build
+FROM eclipse-temurin:23-jdk AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-FROM openjdk:17.0.1-jdk-slim
+FROM eclipse-temurin:23-jdk-slim
 COPY --from=build /target/Xparties.Tinder-0.0.1-SNAPSHOT.jar Xparties.Tinder.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","Xparties.Tinder.jar"]
