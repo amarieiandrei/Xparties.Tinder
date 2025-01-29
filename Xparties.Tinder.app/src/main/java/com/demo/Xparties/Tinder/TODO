@@ -28,4 +28,5 @@ TODOS:
     - Implement swagger for open API support, for client to have informations about requests
     - What is important Docker? Understand Docker
     - What is GitHub actions?
+    - every time building the app gives me symbol not found errors? why?
 
