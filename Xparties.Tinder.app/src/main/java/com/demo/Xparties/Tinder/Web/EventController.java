@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RequestMapping("/event")
+@RequestMapping("/api/event")
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EventController {
