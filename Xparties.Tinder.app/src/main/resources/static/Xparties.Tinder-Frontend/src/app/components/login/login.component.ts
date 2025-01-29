@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   fetchData(): void {
-    const apiUrl = 'https://www.xpartiestinder.com/event/events';  // Replace with your API URL
+    const apiUrl = 'https://www.xpartiestinder.com/api/event/events';  // Replace with your API URL
 
     fetch(apiUrl)
       .then(response => {
