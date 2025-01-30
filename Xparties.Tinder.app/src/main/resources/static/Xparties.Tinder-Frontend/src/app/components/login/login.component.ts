@@ -23,25 +23,25 @@ export class LoginComponent implements OnInit {
   fetchData(): void {
     const apiUrl = 'https://www.xpartiestinder.com/api/event/events';  // Replace with your API URL
 
-    fetch(apiUrl, {
-      method: 'GET',  // or 'POST', 'PUT', etc.
-      headers: {
-        'Content-Type': 'application/json'   // Set content type for request body if needed
-      }
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();  // Parse JSON data
-      })
-      .then(data => {
-        this.data = data;  // Store the response data
-        console.log(this.data);
-      })
-      .catch(error => {
-        this.errorMessage = 'There was an error fetching the data: ' + error.message;
-        console.error('Error:', error);
-      });
+    // fetch(apiUrl, {
+    //   method: 'GET',  // or 'POST', 'PUT', etc.
+    //   headers: {
+    //     'Content-Type': 'application/json'   // Set content type for request body if needed
+    //   }
+    // })
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error('Network response was not ok');
+    //     }
+    //     return response.json();  // Parse JSON data
+    //   })
+    //   .then(data => {
+    //     this.data = data;  // Store the response data
+    //     console.log(this.data);
+    //   })
+    //   .catch(error => {
+    //     this.errorMessage = 'There was an error fetching the data: ' + error.message;
+    //     console.error('Error:', error);
+    //   });
   }
 }
