@@ -25,10 +25,11 @@ public class SecurityConfig {
         return http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/login").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .oauth2Login(oauth2 -> {
-//                    oauth2.loginPage("https://www.xpartiestinder.com");
+                    oauth2.loginPage("https://www.xpartiestinder.com");
                     oauth2.successHandler(successHandler);
                 })
                 .build();
