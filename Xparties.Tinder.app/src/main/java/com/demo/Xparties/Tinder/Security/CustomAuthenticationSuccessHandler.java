@@ -36,8 +36,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
                 String idToken = oidcUser.getIdToken().getTokenValue();
                 Map<String, Object> claims = oidcUser.getIdToken().getClaims();
-                System.out.println("Google ID Token: " + idToken);
-                System.out.println("Google Claims: " + claims);
+//                System.out.println("Google ID Token: " + idToken);
+//                System.out.println("Google Claims: " + claims);
 
                 // You can use the idToken for further processing
             } else if (clientRegistrationId.equals("github")) {
@@ -51,11 +51,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                         clientRegistrationId, oauth2Token.getName());
                 if (authorizedClient != null) {
                     String accessToken = authorizedClient.getAccessToken().getTokenValue();
-                    System.out.println("GitHub Access Token: " + accessToken);
+//                    System.out.println("GitHub Access Token: " + accessToken);
                 }
 
                 Map<String, Object> claims = oAuth2User.getAttributes();
-                System.out.println("GitHub Claims: " + claims);
+//                System.out.println("GitHub Claims: " + claims);
 
                 // You can use the accessToken for further processing
             }
