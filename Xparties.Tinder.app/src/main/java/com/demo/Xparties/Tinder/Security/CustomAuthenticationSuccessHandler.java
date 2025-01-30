@@ -61,6 +61,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             }
         }
         // Redirect to the home page or any other endpoint
-        response.sendRedirect("/");
+        response.sendRedirect("https://www.xpartiestinder.com/events");
     }
 }
