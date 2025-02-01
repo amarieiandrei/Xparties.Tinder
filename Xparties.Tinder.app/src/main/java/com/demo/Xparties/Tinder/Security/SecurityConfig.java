@@ -1,5 +1,6 @@
 package com.demo.Xparties.Tinder.Security;
 
+import com.demo.Xparties.Tinder.Service.OAuth2.Security.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import java.util.List;
 public class SecurityConfig {
 
     private final CustomAuthenticationSuccessHandler successHandler;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -28,7 +30,10 @@ public class SecurityConfig {
                     auth.anyRequest().authenticated();
                 })
                 .oauth2Login(oauth2 -> {
-                    oauth2.loginPage("https://www.xpartiestinder.com");
+//                    oauth2.loginPage("https://www.xpartiestinder.com");
+                    oauth2.userInfoEndpoint(userInfoEndpointConfig -> {
+                        userInfoEndpointConfig.userService(customOAuth2UserService);
+                    });
                     oauth2.successHandler(successHandler);
                 })
                 .build();

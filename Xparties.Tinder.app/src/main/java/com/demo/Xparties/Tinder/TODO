@@ -30,4 +30,5 @@ TODOS:
     - What is GitHub actions?
     - every time building the app gives me symbol not found errors? why?
     - Environment variables to have server deployed and connected to external database
+    - Why google provider dont save credentials?
 
