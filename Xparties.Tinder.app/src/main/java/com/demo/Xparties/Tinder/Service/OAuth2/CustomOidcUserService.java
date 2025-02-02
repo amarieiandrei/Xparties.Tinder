@@ -54,17 +54,14 @@ public class CustomOidcUserService extends OidcUserService {
                 userRepository.save(newUser);
             }
 
-            System.out.println("MALIAKADEMY MAFIA2");
             return oidcUser;
 
         } catch (AuthenticationException e) {
 
-            System.out.println("MALIAKADEMY 3");
             throw e;
 
         } catch (Exception ex) {
 
-            System.out.println("MALIAKADEMY 4");
             throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
 
         }
