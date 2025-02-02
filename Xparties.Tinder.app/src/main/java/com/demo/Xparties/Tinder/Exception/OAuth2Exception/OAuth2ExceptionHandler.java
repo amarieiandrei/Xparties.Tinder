@@ -1,6 +1,5 @@
 package com.demo.Xparties.Tinder.Exception.OAuth2Exception;
 
-import com.demo.Xparties.Tinder.Web.UserController;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

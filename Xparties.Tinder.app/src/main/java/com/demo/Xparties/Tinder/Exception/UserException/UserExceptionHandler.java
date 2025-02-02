@@ -1,6 +1,6 @@
 package com.demo.Xparties.Tinder.Exception.UserException;
 
-import com.demo.Xparties.Tinder.Web.UserController;
+import com.demo.Xparties.Tinder.Controller.UserController;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Web;
+package com.demo.Xparties.Tinder.Controller;
 
 import com.demo.Xparties.Tinder.Dto.PhotoDto.PhotoResponseDto;
 import com.demo.Xparties.Tinder.Service.Photo.PhotoService;

@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Web;
+package com.demo.Xparties.Tinder.Controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;

@@ -1,6 +1,6 @@
 package com.demo.Xparties.Tinder.Exception.MatchException;
 
-import com.demo.Xparties.Tinder.Web.MatchController;
+import com.demo.Xparties.Tinder.Controller.MatchController;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

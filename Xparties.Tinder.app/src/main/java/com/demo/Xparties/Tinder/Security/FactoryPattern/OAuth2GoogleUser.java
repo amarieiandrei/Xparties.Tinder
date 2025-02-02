@@ -1,18 +1,18 @@
-package com.demo.Xparties.Tinder.Service.OAuth2;
+package com.demo.Xparties.Tinder.Security.FactoryPattern;
 
 import com.demo.Xparties.Tinder.Model.Enums.OAuth2Provider;
 
 import java.util.Map;
 
-public class OAuth2FacebookUser extends OAuth2UserDetails {
+public class OAuth2GoogleUser extends OAuth2UserDetails {
 
-    public OAuth2FacebookUser(Map<String, Object> attributes) {
+    public OAuth2GoogleUser(Map<String, Object> attributes) {
         super(attributes);
     }
 
     @Override
     public String getProviderId() {
-        return (String) attributes.get("id");
+        return (String) attributes.get("sub");
     }
 
     @Override
@@ -27,6 +27,6 @@ public class OAuth2FacebookUser extends OAuth2UserDetails {
 
     @Override
     public OAuth2Provider getProvider() {
-        return OAuth2Provider.FACEBOOK;
+        return OAuth2Provider.GOOGLE;
     }
 }

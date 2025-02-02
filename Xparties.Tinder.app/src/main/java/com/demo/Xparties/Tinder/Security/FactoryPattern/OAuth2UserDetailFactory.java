@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Service.OAuth2;
+package com.demo.Xparties.Tinder.Security.FactoryPattern;
 
 import com.demo.Xparties.Tinder.Exception.OAuth2Exception.OAuth2ProviderNotSupported;
 import com.demo.Xparties.Tinder.Model.Enums.OAuth2Provider;

@@ -1,6 +1,6 @@
 package com.demo.Xparties.Tinder.Exception.DownloadException;
 
-import com.demo.Xparties.Tinder.Web.DownloadController;
+import com.demo.Xparties.Tinder.Controller.DownloadController;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
