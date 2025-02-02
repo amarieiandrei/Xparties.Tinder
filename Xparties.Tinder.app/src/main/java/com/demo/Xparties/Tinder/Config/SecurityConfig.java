@@ -33,7 +33,7 @@ public class SecurityConfig {
                     auth.anyRequest().authenticated();
                 })
                 .oauth2Login(oauth2 -> {
-                    oauth2.loginPage("https://www.xpartiestinder.com");
+//                    oauth2.loginPage("https://www.xpartiestinder.com");
                     oauth2.userInfoEndpoint(userInfoEndpointConfig -> {
                         userInfoEndpointConfig.userService(customOAuth2UserService); // For Github, Facebook
                         userInfoEndpointConfig.oidcUserService(customOidcUserService); // For Google (OIDC)
