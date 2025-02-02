@@ -15,7 +15,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // Redirect to the home page or any other endpoint
 
-//        response.sendRedirect("https://www.xpartiestinder.com/events");
-        response.sendRedirect("/user");
+        response.sendRedirect("https://www.xpartiestinder.com/events");
+//        response.sendRedirect("/events");
     }
 }
