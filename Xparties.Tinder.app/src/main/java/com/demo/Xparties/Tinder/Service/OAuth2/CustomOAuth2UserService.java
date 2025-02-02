@@ -54,14 +54,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                 userRepository.save(newUser);
             }
 
+            System.out.println("MALIAKADEMY MAFIA1");
             return oAuth2User;
 
         } catch (AuthenticationException e) {
 
+            System.out.println("MALIAKADEMY 1");
             throw e;
 
         } catch (Exception ex) {
 
+            System.out.println("MALIAKADEMY 2");
             throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
 
         }
