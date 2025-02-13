@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.io.IOException;
 
-@RestControllerAdvice(assignableTypes = UserController.class)
+@RestControllerAdvice()
 public class UserExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {ConstraintViolationException.class})
@@ -26,5 +26,10 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {UserNotCreated.class})
     public void handleUserNotCreatedException(UserNotCreated ex, HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
+    }
+
+    @ExceptionHandler(value = {UserNotFound.class})
+    public void handleUserNotFoundException(UserNotFound ex, HttpServletResponse response) throws IOException {
+        response.sendError(HttpStatus.NOT_FOUND.value(), ex.getMessage());
     }
 }

@@ -1,4 +1,4 @@
-package com.demo.Xparties.Tinder.Service.OAuth2;
+package com.demo.Xparties.Tinder.Security.OAuth2;
 
 import com.demo.Xparties.Tinder.Exception.OAuth2Exception.OAuth2UserNotFoundByProperties;
 import com.demo.Xparties.Tinder.Model.Entity.User;
@@ -9,10 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
@@ -21,21 +21,21 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class CustomOidcUserService extends OidcUserService {
+public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
 
     @Override
     @Transactional
-    public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
         try {
 
-            OidcUser oidcUser = super.loadUser(userRequest);
+            OAuth2User oAuth2User = super.loadUser(userRequest);
 
             String registrationId = userRequest.getClientRegistration().getRegistrationId();
 
-            OAuth2UserDetails oAuth2UserDetails = OAuth2UserDetailFactory.getOAuth2UserDetail(registrationId, oidcUser.getAttributes());
+            OAuth2UserDetails oAuth2UserDetails = OAuth2UserDetailFactory.getOAuth2UserDetail(registrationId, oAuth2User.getAttributes());
 
             if (ObjectUtils.isEmpty(oAuth2UserDetails)) {
                 throw new OAuth2UserNotFoundByProperties("Can't found OAuth2 user by properties");
@@ -54,7 +54,7 @@ public class CustomOidcUserService extends OidcUserService {
                 userRepository.save(newUser);
             }
 
-            return oidcUser;
+            return oAuth2User;
 
         } catch (AuthenticationException e) {
 
@@ -65,6 +65,5 @@ public class CustomOidcUserService extends OidcUserService {
             throw new InternalAuthenticationServiceException(ex.getMessage(), ex);
 
         }
-
     }
 }
