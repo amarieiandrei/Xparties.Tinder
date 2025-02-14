@@ -19,27 +19,27 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 
-        String userId;
-        String email;
-        String name;
-
-        if (authentication.getPrincipal() instanceof OidcUser oidcUser) {
-            Map<String, Object> attributes = oidcUser.getAttributes();
-            userId = attributes.get("sub").toString();
-            email = attributes.get("email").toString();
-            name = attributes.get("name").toString();
-        } else if (authentication.getPrincipal() instanceof OAuth2User oAuth2User) {
-            Map<String, Object> attributes = oAuth2User.getAttributes();
-            userId = attributes.get("id").toString();
-            email = attributes.get("email").toString();
-            name = attributes.get("name").toString();
-        } else {
-            throw new OAuth2ProviderNotSupported("Authentication type not supported");
-        }
-
-        String token = JwtUtil.generateToken(userId, email, name);
-
-        JwtUtil.setJwtTokenToCookie(token, response);
+//        String userId;
+//        String email;
+//        String name;
+//
+//        if (authentication.getPrincipal() instanceof OidcUser oidcUser) {
+//            Map<String, Object> attributes = oidcUser.getAttributes();
+//            userId = attributes.get("sub").toString();
+//            email = attributes.get("email").toString();
+//            name = attributes.get("name").toString();
+//        } else if (authentication.getPrincipal() instanceof OAuth2User oAuth2User) {
+//            Map<String, Object> attributes = oAuth2User.getAttributes();
+//            userId = attributes.get("id").toString();
+//            email = attributes.get("email").toString();
+//            name = attributes.get("name").toString();
+//        } else {
+//            throw new OAuth2ProviderNotSupported("Authentication type not supported");
+//        }
+//
+//        String token = JwtUtil.generateToken(userId, email, name);
+//
+//        JwtUtil.setJwtTokenToCookie(token, response);
 
         response.sendRedirect("https://www.xpartiestinder.com/events");
 //        response.sendRedirect("/api/event/events");

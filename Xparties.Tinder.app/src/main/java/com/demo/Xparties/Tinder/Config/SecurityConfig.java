@@ -35,7 +35,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+//                .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 //                 TODO: Add if only someone recommand
 //                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
@@ -43,7 +43,7 @@ public class SecurityConfig {
 //                    auth.requestMatchers("/login").permitAll();
                     auth.anyRequest().authenticated();
                 })
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login(oauth2 -> {
 //                    oauth2.loginPage("https://www.xpartiestinder.com");
                     oauth2.userInfoEndpoint(userInfoEndpointConfig -> {
