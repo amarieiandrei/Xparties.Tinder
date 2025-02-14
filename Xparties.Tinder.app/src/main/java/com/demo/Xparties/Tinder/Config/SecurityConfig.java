@@ -65,7 +65,7 @@ public class SecurityConfig {
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         // Expose headers so the frontend can access them
-        config.setExposedHeaders(List.of("Authorization"));
+        config.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
         // Allow credentials (important for OAuth2 cookies)
         config.setAllowCredentials(true);
 
