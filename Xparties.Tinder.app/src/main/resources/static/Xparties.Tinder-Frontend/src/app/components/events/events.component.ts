@@ -14,7 +14,9 @@ export class EventsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.fetchData();
+    setTimeout(() => {
+      this.fetchData();
+    }, 5000);
   }
 
   fetchData(): void {
