@@ -63,7 +63,8 @@ public class SecurityConfig {
 
         config.setAllowedOrigins(List.of("https://www.xpartiestinder.com"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+//        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowedHeaders(List.of("*"));
         // Expose headers so the frontend can access them
         config.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
         // Allow credentials (important for OAuth2 cookies)
