@@ -43,8 +43,7 @@ public class JwtUtil {
             cookie.setSecure(true); // Works only over HTTPS
             cookie.setPath("/");
             cookie.setMaxAge((int) (expirationTime / 1000) - 10);
-//            cookie.setAttribute("SameSite", "Strict");
-            cookie.setAttribute("SameSite", "None");
+            cookie.setAttribute("SameSite", "Strict");
 
             response.addCookie(cookie);
 
@@ -117,8 +116,7 @@ public class JwtUtil {
             cookie.setSecure(true);
             cookie.setPath("/");
             cookie.setMaxAge(0);
-//            cookie.setAttribute("SameSite", "Strict");
-            cookie.setAttribute("SameSite", "None");
+            cookie.setAttribute("SameSite", "Strict");
             response.addCookie(cookie);
 
         } catch (Exception e) {
