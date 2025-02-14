@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
 
     fetch(apiUrl, {
       method: 'GET',  // or 'POST', 'PUT', etc.
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json'   // Set content type for request body if needed
       },
-      credentials: 'include'
     })
       .then(response => {
         if (!response.ok) {
