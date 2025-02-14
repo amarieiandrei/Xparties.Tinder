@@ -24,7 +24,8 @@ export class EventsComponent implements OnInit {
       method: 'GET',  // or 'POST', 'PUT', etc.
       headers: {
         'Content-Type': 'application/json'   // Set content type for request body if needed
-      }
+      },
+      credentials: 'include'
     })
       .then(response => {
         if (!response.ok) {
