@@ -65,7 +65,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
 //        , "http://localhost:4200"
-        config.setAllowedOrigins(List.of("https://www.xpartiestinder.com/", "http://localhost:4200/"));
+        config.setAllowedOrigins(List.of("https://www.xpartiestinder.com", "http://localhost:4200"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 //        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         config.setAllowedHeaders(List.of("*"));

@@ -51,8 +51,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //        cookie.setDomain("www.xpartiestinder.com");
         cookie.setMaxAge((int) (expirationTime / 1000) - 10);
 //        cookie.setAttribute("SameSite", "Strict");
-        cookie.setAttribute("SameSite", "None");
-//            cookie.setAttribute("SameSite", "Lax");
+//        cookie.setAttribute("SameSite", "None");
+            cookie.setAttribute("SameSite", "Lax");
 
         response.addCookie(cookie);
 
