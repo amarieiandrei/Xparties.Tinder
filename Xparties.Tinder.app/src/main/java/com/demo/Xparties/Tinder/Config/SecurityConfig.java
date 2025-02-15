@@ -38,13 +38,13 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
 //                 TODO: Add if only someone recommand -> NO JSESSIONID which is great because I am using jwt token only without session token
-//                .sessionManagement(session -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
-//                    auth.requestMatchers("/login", "/oauth2/**").permitAll();
-                    auth.requestMatchers("/login", "/oauth2/**", "/api/event/events").permitAll();
+                    auth.requestMatchers("/login", "/oauth2/**").permitAll();
+//                    auth.requestMatchers("/login", "/oauth2/**", "/api/event/events").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
