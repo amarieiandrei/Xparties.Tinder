@@ -1,8 +1,0 @@
-{
-    "rewrites": [
-      {
-        "source": "/api/:path*",
-        "destination": "https://xparties-tinder.onrender.com/api/:path*"
-      }
-    ]
-}
