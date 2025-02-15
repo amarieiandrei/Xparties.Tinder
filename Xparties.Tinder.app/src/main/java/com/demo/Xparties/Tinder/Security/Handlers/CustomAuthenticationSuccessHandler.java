@@ -2,6 +2,7 @@ package com.demo.Xparties.Tinder.Security.Handlers;
 
 import com.demo.Xparties.Tinder.Exception.OAuth2Exception.OAuth2ProviderNotSupported;
 import com.demo.Xparties.Tinder.Security.JWT.JwtUtil;
+import jakarta.servlet.http.Cookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -39,9 +40,24 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         String token = JwtUtil.generateToken(userId, email, name);
 
-        JwtUtil.setJwtTokenToCookie(token, response);
+//        JwtUtil.setJwtTokenToCookie(token, response);
+
+        long expirationTime = Long.parseLong(System.getenv(JwtUtil.EXPIRATION_TIME));
+
+        Cookie cookie = new Cookie("JWT_TOKEN_XPARTIESTINDER", token);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true); // Works only over HTTPS
+        cookie.setPath("/");
+//        cookie.setDomain("www.xpartiestinder.com");
+        cookie.setMaxAge((int) (expirationTime / 1000) - 10);
+        cookie.setAttribute("SameSite", "Strict");
+//        cookie.setAttribute("SameSite", "None");
+//            cookie.setAttribute("SameSite", "Lax");
+
+        response.addCookie(cookie);
 
         response.sendRedirect("https://www.xpartiestinder.com/events");
 //        response.sendRedirect("/api/event/events");
+//        response.sendRedirect("http://localhost:4200/events");
     }
 }

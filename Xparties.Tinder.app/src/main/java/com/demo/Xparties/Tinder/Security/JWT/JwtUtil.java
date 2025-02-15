@@ -11,7 +11,7 @@ import java.security.PublicKey;
 import java.util.Date;
 
 public class JwtUtil {
-    private static final String EXPIRATION_TIME = "EXPIRATION_TIME";
+    public static final String EXPIRATION_TIME = "EXPIRATION_TIME";
 
     public static String generateToken(String userId, String email, String name) {
         try {
@@ -39,10 +39,9 @@ public class JwtUtil {
             long expirationTime = Long.parseLong(System.getenv(EXPIRATION_TIME));
 
             Cookie cookie = new Cookie("JWT_TOKEN_XPARTIESTINDER", token);
-            cookie.setHttpOnly(true);
-            cookie.setSecure(true); // Works only over HTTPS
+//            cookie.setHttpOnly(true);
+            cookie.setSecure(false); // Works only over HTTPS
             cookie.setPath("/");
-            cookie.setDomain("www.xpartiestinder.com");
             cookie.setMaxAge((int) (expirationTime / 1000) - 10);
 //            cookie.setAttribute("SameSite", "Strict");
             cookie.setAttribute("SameSite", "None");
@@ -119,8 +118,8 @@ public class JwtUtil {
             cookie.setSecure(true);
             cookie.setPath("/");
             cookie.setMaxAge(0);
-//            cookie.setAttribute("SameSite", "Strict");
-            cookie.setAttribute("SameSite", "None");
+            cookie.setAttribute("SameSite", "Strict");
+//            cookie.setAttribute("SameSite", "None");
 //            cookie.setAttribute("SameSite", "Lax");
             response.addCookie(cookie);
 
