@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/login", "/oauth2/**").permitAll();
+                    auth.requestMatchers("/api/event/events").authenticated(); // ✅ Ensure JWT works here
 //                    auth.requestMatchers("/login", "/oauth2/**", "/api/event/events").permitAll();
                     auth.anyRequest().authenticated();
                 })
@@ -66,14 +67,14 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
 //        , "http://localhost:4200"
+        config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of("https://www.xpartiestinder.com", "http://localhost:4200"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-//        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-        config.setAllowedHeaders(List.of("*"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+//        config.setAllowedHeaders(List.of("*"));
         // Expose headers so the frontend can access them
         config.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
         // Allow credentials (important for OAuth2 cookies)
-        config.setAllowCredentials(true);
 
 //        config.setMaxAge(3600L);
 
