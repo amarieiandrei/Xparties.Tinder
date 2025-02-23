@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.fetchData();
-    // }, 5000);
+    setTimeout(() => {
+      this.fetchData();
+    }, 5000);
   }
 
   fetchData(): void {
