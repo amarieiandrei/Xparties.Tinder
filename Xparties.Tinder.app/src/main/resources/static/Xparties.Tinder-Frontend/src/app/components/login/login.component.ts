@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       this.fetchData();
     }, 5000);
+
   }
 
   fetchData(): void {
