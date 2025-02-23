@@ -3,6 +3,8 @@ package com.demo.Xparties.Tinder.Security.Handlers;
 import com.demo.Xparties.Tinder.Exception.OAuth2Exception.OAuth2ProviderNotSupported;
 import com.demo.Xparties.Tinder.Security.JWT.JwtUtil;
 import jakarta.servlet.http.Cookie;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -44,19 +46,37 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         long expirationTime = Long.parseLong(System.getenv(JwtUtil.EXPIRATION_TIME));
 
-        Cookie cookie = new Cookie("JWT_TOKEN_XPARTIESTINDER", token);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true); // Works only over HTTPS
-        cookie.setPath("/");
-        cookie.setDomain("xpartiestinder.com");
-        cookie.setMaxAge((int) (expirationTime / 1000));
+        // METHOD 2
+        // ✅ Use ResponseCookie (More Reliable than Cookie)
+        ResponseCookie jwtCookie = ResponseCookie.from("JWT_TOKEN_XPARTIESTINDER", token)
+                .httpOnly(true)
+                .secure(true)  // Only send over HTTPS
+                .sameSite("None")  // Cross-origin cookie allowed
+                .domain("xpartiestinder.com")  // Available across subdomains
+                .path("/")  // Available for all paths
+                .maxAge(expirationTime / 1000)  // Convert ms to seconds
+                .build();
+
+        response.addHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString());
+
+        // ✅ Use 303 See Other Instead of 302
+        response.setStatus(HttpServletResponse.SC_SEE_OTHER);
+        response.setHeader("Location", "https://www.xpartiestinder.com/events");
+
+        // METHOD 1
+//        Cookie cookie = new Cookie("JWT_TOKEN_XPARTIESTINDER", token);
+//        cookie.setHttpOnly(true);
+//        cookie.setSecure(true); // Works only over HTTPS
+//        cookie.setPath("/");
+//        cookie.setDomain("xpartiestinder.com");
+//        cookie.setMaxAge((int) (expirationTime / 1000));
 //        cookie.setAttribute("SameSite", "Strict");
-        cookie.setAttribute("SameSite", "None");
-//            cookie.setAttribute("SameSite", "Lax");
+//        cookie.setAttribute("SameSite", "None");
+//          cookie.setAttribute("SameSite", "Lax");
 
-        response.addCookie(cookie);
+//        response.addCookie(cookie);
 
-        response.sendRedirect("https://www.xpartiestinder.com");
+//        response.sendRedirect("https://www.xpartiestinder.com");
 //        response.sendRedirect("/api/event/events");
 //        response.sendRedirect("http://localhost:4200/events");
     }
