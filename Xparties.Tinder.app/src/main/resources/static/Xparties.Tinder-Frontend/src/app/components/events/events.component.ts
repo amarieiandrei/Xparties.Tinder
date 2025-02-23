@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
 
 @Component({
   selector: 'app-events',
-  imports: [CommonModule],
+  imports: [HlmButtonDirective, CommonModule],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
@@ -14,9 +15,9 @@ export class EventsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.fetchData();
-    }, 5000);
+    // setTimeout(() => {
+    //   this.fetchData();
+    // }, 5000);
   }
 
   fetchData(): void {
