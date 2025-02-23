@@ -117,9 +117,10 @@ public class JwtUtil {
             cookie.setHttpOnly(true);
             cookie.setSecure(true);
             cookie.setPath("/");
+            cookie.setDomain("xpartiestinder.com");
             cookie.setMaxAge(0);
-            cookie.setAttribute("SameSite", "Strict");
-//            cookie.setAttribute("SameSite", "None");
+//            cookie.setAttribute("SameSite", "Strict");
+            cookie.setAttribute("SameSite", "None");
 //            cookie.setAttribute("SameSite", "Lax");
             response.addCookie(cookie);
 
