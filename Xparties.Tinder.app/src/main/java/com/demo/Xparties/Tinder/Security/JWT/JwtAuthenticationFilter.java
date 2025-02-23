@@ -33,17 +33,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
 
+            System.out.println("Incoming request: {} {}" + request.getMethod() + request.getRequestURI());
             String token = JwtUtil.extractTokenFromCookie(request);
+            System.out.println("Extracted token: {}" + token);
 
             if (token != null) {
                 validateAndAuthenticateUser(token, request, response);
+            } else {
+                System.out.println("No JWT token found in cookies.");
             }
 
         } catch (ExpiredJwtException e) {
+            System.out.println("JWT Token is expired." + e);
             throw new JwtTokenExpired("JWT Token is expired.");
         } catch (MalformedJwtException | SignatureException e) {
+            System.out.println("Invalid JWT Token." + e);
             throw new JwtTokenInvalid("Invalid JWT Token.");
         } catch (Exception e) {
+            System.out.println("Unexpected error in JWT authentication message." + e);
             throw new JwtAuthenticationError("Error in JWT authentication.");
         }
 

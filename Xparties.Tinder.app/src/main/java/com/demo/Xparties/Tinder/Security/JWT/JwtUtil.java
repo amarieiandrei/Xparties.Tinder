@@ -77,10 +77,14 @@ public class JwtUtil {
             if (request.getCookies() != null) {
                 for (Cookie cookie : request.getCookies()) {
                     if ("JWT_TOKEN_XPARTIESTINDER".equals(cookie.getName())) {
-                        return sanitizeToken(cookie.getValue());
+                        String token = cookie.getValue();
+                        System.out.println("Extracted JWT from Cookie: {}" + token);  // ✅ Log the token
+                        return token;
+//                        return sanitizeToken(cookie.getValue());
                     }
                 }
             }
+            System.out.println("No JWT token found in cookies.");
             return null;
 
         } catch (Exception e) {
