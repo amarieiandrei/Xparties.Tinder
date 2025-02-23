@@ -56,7 +56,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         response.addCookie(cookie);
 
-        response.sendRedirect("https://www.xpartiestinder.com/events");
+        response.sendRedirect("https://www.xpartiestinder.com");
 //        response.sendRedirect("/api/event/events");
 //        response.sendRedirect("http://localhost:4200/events");
     }
