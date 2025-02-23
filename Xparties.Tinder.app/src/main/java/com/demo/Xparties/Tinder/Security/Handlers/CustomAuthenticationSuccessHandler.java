@@ -48,7 +48,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         cookie.setHttpOnly(true);
         cookie.setSecure(true); // Works only over HTTPS
         cookie.setPath("/");
-        cookie.setDomain(".xpartiestinder.com");
+        cookie.setDomain("xpartiestinder.com");
 //        cookie.setDomain("www.xpartiestinder.com");
 //        cookie.setValue(token);
         cookie.setMaxAge((int) (expirationTime / 1000) - 10);
