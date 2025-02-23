@@ -53,7 +53,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //        cookie.setValue(token);
         cookie.setMaxAge((int) (expirationTime / 1000) - 10);
 //        cookie.setAttribute("SameSite", "Strict");
-//        cookie.setAttribute("SameSite", "None");
+        cookie.setAttribute("SameSite", "None");
 //            cookie.setAttribute("SameSite", "Lax");
 
         response.addCookie(cookie);
