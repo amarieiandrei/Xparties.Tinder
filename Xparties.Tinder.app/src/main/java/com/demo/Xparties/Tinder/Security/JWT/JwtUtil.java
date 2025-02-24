@@ -39,13 +39,13 @@ public class JwtUtil {
             long expirationTime = Long.parseLong(System.getenv(EXPIRATION_TIME));
 
             Cookie cookie = new Cookie("JWT_TOKEN_XPARTIESTINDER", token);
-//            cookie.setHttpOnly(true);
-            cookie.setSecure(false); // Works only over HTTPS
+            cookie.setHttpOnly(true);
+//            cookie.setSecure(true);
             cookie.setPath("/");
+//            cookie.setDomain("xpartiestinder.com");
+            cookie.setDomain("localhost");
             cookie.setMaxAge((int) (expirationTime / 1000) - 10);
-//            cookie.setAttribute("SameSite", "Strict");
             cookie.setAttribute("SameSite", "None");
-//            cookie.setAttribute("SameSite", "Lax");
 
             response.addCookie(cookie);
 
@@ -74,17 +74,16 @@ public class JwtUtil {
     public static String extractTokenFromCookie(HttpServletRequest request) {
         try {
 
-            if (request.getCookies() != null) {
-                for (Cookie cookie : request.getCookies()) {
+            Cookie[] cookies = request.getCookies();
+
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
                     if ("JWT_TOKEN_XPARTIESTINDER".equals(cookie.getName())) {
-                        String token = cookie.getValue();
-                        System.out.println("Extracted JWT from Cookie: {}" + token);  // ✅ Log the token
-                        return token;
 //                        return sanitizeToken(cookie.getValue());
+                        return cookie.getValue();
                     }
                 }
             }
-            System.out.println("No JWT token found in cookies.");
             return null;
 
         } catch (Exception e) {
@@ -122,10 +121,9 @@ public class JwtUtil {
             cookie.setSecure(true);
             cookie.setPath("/");
             cookie.setDomain("xpartiestinder.com");
+//            cookie.setDomain("localhost");
             cookie.setMaxAge(0);
-//            cookie.setAttribute("SameSite", "Strict");
             cookie.setAttribute("SameSite", "None");
-//            cookie.setAttribute("SameSite", "Lax");
             response.addCookie(cookie);
 
         } catch (Exception e) {

@@ -33,9 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
 
-            System.out.println("Incoming request: {} {}" + request.getMethod() + request.getRequestURI());
             String token = JwtUtil.extractTokenFromCookie(request);
-            System.out.println("Extracted token: {}" + token);
 
             if (token != null) {
                 validateAndAuthenticateUser(token, request, response);
@@ -61,9 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (!JwtUtil.validateToken(token)) {
             JwtUtil.removeInvalidJwtTokenFromCookie(response);
             throw new JwtTokenNotValidated("JWT token could not be validated.");
-        }
-
-        if (JwtUtil.validateToken(token)) {
+        } else {
             UserDetails userDetails = null;
 
             try {
