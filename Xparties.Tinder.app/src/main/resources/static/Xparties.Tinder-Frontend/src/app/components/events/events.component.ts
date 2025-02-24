@@ -21,9 +21,9 @@ export class EventsComponent implements OnInit {
   }
 
   fetchData(): void {
-    // const apiUrl = 'https://www.xpartiestinder.com/api/event/events';  // Replace with your API URL
+    const apiUrl = 'https://www.xpartiestinder.com/api/event/events';  // Replace with your API URL
     // investigate
-    const apiUrl = 'http://localhost:8080/api/event/events';  // Replace with your API URL
+    // const apiUrl = 'http://localhost:8080/api/event/events';  // Replace with your API URL
 
     fetch(apiUrl, {
       method: 'GET',  // or 'POST', 'PUT', etc.
