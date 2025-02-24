@@ -40,25 +40,33 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             throw new OAuth2ProviderNotSupported("Authentication type not supported");
         }
 
-        String token = JwtUtil.generateToken(userId, email, name);
+        // Using a controller
 
-//        JwtUtil.setJwtTokenToCookie(token, response);
+        String redirectUrl = String.format(
+                "https://api.xpartiestinder.com/api/auth/redirect?userId=%s&email=%s&name=%s",
+                userId, email, name
+        );
+        response.sendRedirect(redirectUrl);
 
-        long expirationTime = Long.parseLong(System.getenv(JwtUtil.EXPIRATION_TIME));
+        // End using a controller
 
-        ResponseCookie cookie = ResponseCookie.from("JWT_TOKEN_XPARTIESTINDER", token)
-                .httpOnly(true)
-                .secure(true)
-                .domain("xpartiestinder.com")
-//                .domain("localhost")
-                .path("/")
-                .maxAge((int) (expirationTime / 1000) - 10)
-                .sameSite("None")
-                .build();
+//        String token = JwtUtil.generateToken(userId, email, name);
 
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+//        long expirationTime = Long.parseLong(System.getenv(JwtUtil.EXPIRATION_TIME));
 
-//        response.sendRedirect("http://localhost:4200/events");
-        response.sendRedirect("https://www.xpartiestinder.com/events");
+//        ResponseCookie cookie = ResponseCookie.from("JWT_TOKEN_XPARTIESTINDER", token)
+//                .httpOnly(true)
+//                .secure(true)
+//                .domain("xpartiestinder.com")
+//                  .domain("localhost")
+//                .path("/")
+//                .maxAge((int) (expirationTime / 1000) - 10)
+//                .sameSite("None")
+//                .build();
+
+//        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
+//          response.sendRedirect("http://localhost:4200/events");
+//        response.sendRedirect("https://www.xpartiestinder.com/events");
     }
 }
