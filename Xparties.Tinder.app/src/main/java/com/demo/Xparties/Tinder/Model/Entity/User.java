@@ -41,7 +41,7 @@ public class User {
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
-    // Method to return authorities (empty collection)
+    // Method to return authorities (empty collection)s
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities != null ? authorities : Collections.emptyList();
     }
