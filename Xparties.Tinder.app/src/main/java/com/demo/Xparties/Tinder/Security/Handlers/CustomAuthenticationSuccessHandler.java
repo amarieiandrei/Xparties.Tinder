@@ -42,15 +42,17 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         // Using a controller
 
-        String redirectUrl = String.format(
-                "https://api.xpartiestinder.com/api/auth/redirect?userId=%s&email=%s&name=%s",
-                userId, email, name
-        );
-        response.sendRedirect(redirectUrl);
+//        String redirectUrl = String.format(
+//                "https://api.xpartiestinder.com/api/auth/redirect?userId=%s&email=%s&name=%s",
+//                userId, email, name
+//        );
+//        response.sendRedirect(redirectUrl);
 
         // End using a controller
 
-//        String token = JwtUtil.generateToken(userId, email, name);
+        String token = JwtUtil.generateToken(userId, email, name);
+
+        JwtUtil.setJwtTokenToCookie(token, response);
 
 //        long expirationTime = Long.parseLong(System.getenv(JwtUtil.EXPIRATION_TIME));
 
@@ -63,10 +65,10 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 //                .maxAge((int) (expirationTime / 1000) - 10)
 //                .sameSite("None")
 //                .build();
-
+//
 //        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
 //          response.sendRedirect("http://localhost:4200/events");
-//        response.sendRedirect("https://www.xpartiestinder.com/events");
+        response.sendRedirect("https://www.xpartiestinder.com/events");
     }
 }

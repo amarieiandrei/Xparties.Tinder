@@ -40,10 +40,10 @@ public class JwtUtil {
 
             Cookie cookie = new Cookie("JWT_TOKEN_XPARTIESTINDER", token);
             cookie.setHttpOnly(true);
-//            cookie.setSecure(true);
+            cookie.setSecure(true);
+            cookie.setDomain("xpartiestinder.com");
+//            cookie.setDomain("localhost");
             cookie.setPath("/");
-//            cookie.setDomain("xpartiestinder.com");
-            cookie.setDomain("localhost");
             cookie.setMaxAge((int) (expirationTime / 1000) - 10);
             cookie.setAttribute("SameSite", "None");
 
