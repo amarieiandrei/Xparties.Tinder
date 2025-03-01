@@ -43,6 +43,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> {
                     auth.anyRequest().authenticated();
+//                    auth.anyRequest().permitAll();
                 })
                 .oauth2Login(oauth2 -> {
                     oauth2.userInfoEndpoint(userInfoEndpointConfig -> {

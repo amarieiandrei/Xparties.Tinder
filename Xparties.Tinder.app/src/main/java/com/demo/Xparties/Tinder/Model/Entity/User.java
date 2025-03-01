@@ -36,12 +36,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private OAuth2Provider provider;
 
-    // TODO: REFACTOR WITH CUSTOMUSERDETAILS
+    // TODO: REFACTOR WITH Custom User Details
     // Add authorities as a transient field (not persisted in the database)
     @Transient
     private Collection<? extends GrantedAuthority> authorities;
 
-    // Method to return authorities (empty collection)s
+    // Method to return authorities (empty collection)
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities != null ? authorities : Collections.emptyList();
     }

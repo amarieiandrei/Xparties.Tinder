@@ -16,6 +16,8 @@ public class OAuth2UserDetailFactory {
             return new OAuth2GoogleUser(attributes);
         } else if (registrationIdUpperCase.equals(OAuth2Provider.FACEBOOK.toString())) {
             return new OAuth2FacebookUser(attributes);
+        } else if (registrationIdUpperCase.equals(OAuth2Provider.THREADS.toString())) {
+            return new OAuth2ThreadsUser(attributes);
         } else {
             throw new OAuth2ProviderNotSupported("Sorry! Unsupported OAuth2 provider with a registration id " + registrationId.toUpperCase());
         }

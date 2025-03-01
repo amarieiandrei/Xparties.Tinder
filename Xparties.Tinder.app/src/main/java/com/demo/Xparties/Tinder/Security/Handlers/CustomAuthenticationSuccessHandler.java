@@ -2,9 +2,6 @@ package com.demo.Xparties.Tinder.Security.Handlers;
 
 import com.demo.Xparties.Tinder.Exception.OAuth2Exception.OAuth2ProviderNotSupported;
 import com.demo.Xparties.Tinder.Security.JWT.JwtUtil;
-import jakarta.servlet.http.Cookie;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -40,35 +37,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             throw new OAuth2ProviderNotSupported("Authentication type not supported");
         }
 
-        // Using a controller
-
-//        String redirectUrl = String.format(
-//                "https://api.xpartiestinder.com/api/auth/redirect?userId=%s&email=%s&name=%s",
-//                userId, email, name
-//        );
-//        response.sendRedirect(redirectUrl);
-
-        // End using a controller
-
         String token = JwtUtil.generateToken(userId, email, name);
 
         JwtUtil.setJwtTokenToCookie(token, response);
 
-//        long expirationTime = Long.parseLong(System.getenv(JwtUtil.EXPIRATION_TIME));
-
-//        ResponseCookie cookie = ResponseCookie.from("JWT_TOKEN_XPARTIESTINDER", token)
-//                .httpOnly(true)
-//                .secure(true)
-//                .domain("xpartiestinder.com")
-//                  .domain("localhost")
-//                .path("/")
-//                .maxAge((int) (expirationTime / 1000) - 10)
-//                .sameSite("None")
-//                .build();
-//
-//        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
-
-//          response.sendRedirect("http://localhost:4200/events");
-        response.sendRedirect("https://www.xpartiestinder.com/events");
+          response.sendRedirect("http://localhost:4200/dashboard");
+//        response.sendRedirect("https://www.xpartiestinder.com/events");
     }
 }
