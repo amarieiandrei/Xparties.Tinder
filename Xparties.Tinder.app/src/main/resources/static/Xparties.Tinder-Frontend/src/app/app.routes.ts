@@ -8,8 +8,9 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'events',
-        loadComponent: () => import('./components/events/events.component').then(m => m.EventsComponent)
+        path: 'dashboard',
+        loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
+        // TODO: Make a guard for this mtfk
     },
     {
         path: '**',
