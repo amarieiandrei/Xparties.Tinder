@@ -112,6 +112,24 @@ public class JwtUtil {
         }
     }
 
+    public static String getProviderIdFromToken(String token) {
+        try {
+
+            PublicKey publicKey = RSAKeyProvider.getPublicKey();
+
+            Claims claims = Jwts.parser()
+                    .verifyWith(publicKey)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+
+            return claims.get("sub", String.class);
+
+        } catch (Exception e) {
+            throw new JwtTokenInformationNotExtracted("Provider id could not be extracted from JWT token.");
+        }
+    }
+
     public static void removeInvalidJwtTokenFromCookie(HttpServletResponse response) {
         try {
 
