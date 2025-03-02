@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { AuthenticationGuard } from './core/guards/authentication.guard';
 
 export const routes: Routes = [
     {
@@ -10,7 +11,7 @@ export const routes: Routes = [
     {
         path: 'dashboard',
         loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
-        // TODO: Make a guard for this mtfk
+        canActivate: [AuthenticationGuard]
     },
     {
         path: '**',

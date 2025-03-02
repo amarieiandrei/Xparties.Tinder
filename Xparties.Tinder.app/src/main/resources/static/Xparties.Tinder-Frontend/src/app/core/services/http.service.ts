@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 
@@ -7,9 +7,11 @@ import { Observable } from "rxjs";
     providedIn: 'root'
 })
 export class HttpService {
+    private http = inject(HttpClient);
+
     private baseUrl = 'http://localhost:8080/api';
 
-    constructor(private http: HttpClient) { }
+    constructor() { }
 
     get<T>(url: string, params?: HttpParams): Observable<T> {
         return this.http.get<T>(`${this.baseUrl}${url}`, {
