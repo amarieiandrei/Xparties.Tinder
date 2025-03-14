@@ -5,15 +5,15 @@ import { HlmSwitchComponent } from '../../../../libs/ui/ui-switch-helm/src/lib/h
 
 // directives
 import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
+import { HlmLabelDirective } from '../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
 
 // services
 import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-welcome',
-  imports: [HlmButtonDirective, HlmSwitchComponent],
+  imports: [HlmButtonDirective, HlmSwitchComponent, HlmLabelDirective],
   templateUrl: './welcome.component.html',
-  styleUrl: './welcome.component.css'
 })
 export class WelcomeComponent {
   private _themeService = inject(ThemeService);
