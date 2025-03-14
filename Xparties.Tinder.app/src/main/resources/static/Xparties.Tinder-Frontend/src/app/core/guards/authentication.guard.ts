@@ -7,11 +7,20 @@ export const AuthenticationGuard = () => {
     const router = inject(Router);
 
     // TODO: May be a good ideea to inform user that needs to be authenticated before accessing a resource if the guards dont let user inside
-    return authenticationService.checkAuthentication().subscribe(authenticated => {
-        if (!authenticated) {
+    // TODO: Needs a loading spinner into dashboard until all the request are done, or for example if error send user back to login
+    return authenticationService.checkAuthentication().subscribe({
+        next: (authenticated) => {
+            if (!authenticated) {
+                router.navigate(['']);
+                return false;
+            }
+            return true;
+        },
+        error: (err) => {
+            // TODO: Refactor the errors in UI
+            console.error('Error checking authentication:', err);
             router.navigate(['']);
             return false;
         }
-        return true;
     })
 }

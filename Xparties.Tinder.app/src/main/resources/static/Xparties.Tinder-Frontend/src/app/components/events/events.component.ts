@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, OnInit, signal } from '@angular/core';
+
+// directives
 import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
+
+// services
 import { EventService } from './services/event.service';
 import { AuthenticationService } from '../../core/services/authentication.service';
 
@@ -12,8 +16,7 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 })
 export class EventsComponent implements OnInit {
   private eventService = inject(EventService);
-  // TODO: Change with private
-  public authenticationService = inject(AuthenticationService);
+  private authenticationService = inject(AuthenticationService);
 
   events = signal<Event[]>([]);
 

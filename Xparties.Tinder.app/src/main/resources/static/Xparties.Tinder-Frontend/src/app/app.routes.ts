@@ -9,9 +9,18 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'welcome',
+        loadComponent: () => import('./components/welcome/welcome.component').then(m => m.WelcomeComponent)
+    },
+    {
         path: 'dashboard',
         loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
-        canActivate: [AuthenticationGuard]
+        // TODO: Comment until the template ready
+        // canActivate: [AuthenticationGuard]
+    },
+    {
+        path: 'events',
+        loadComponent: () => import('./components/events/events.component').then(m => m.EventsComponent)
     },
     {
         path: '**',

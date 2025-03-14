@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
---font-sans: ''
+    --font-sans: '';
 }
 
 :root {
@@ -32,7 +32,7 @@
 color-scheme: light;
 }
 
-.dark {
+.Dark {
 --background: 224 71.4% 4.1%;
 --foreground: 210 20% 98%;
 --muted: 215 27.9% 16.9%;
@@ -55,6 +55,11 @@ color-scheme: light;
 color-scheme: dark;
 }
 
+body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    transition: background-color 0.3s, color 0.3s;
+}
 
 @layer base {
     * {
