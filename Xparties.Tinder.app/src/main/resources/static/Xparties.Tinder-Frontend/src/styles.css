@@ -1,11 +1,13 @@
 @import '@angular/cdk/overlay-prebuilt.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --font-sans: '';
+    --font-sans: 'Montserrat', sans-serif;
+    --selection-color: 323, 100%, 70%;
 }
 
 :root {
@@ -57,6 +59,7 @@ color-scheme: dark;
 
 body {
     background-color: hsl(var(--background));
+    font-family: var(--font-sans);
     color: hsl(var(--foreground));
     transition: background-color 0.3s, color 0.3s;
 }
@@ -65,4 +68,9 @@ body {
     * {
         @apply border-border;
     }
+}
+
+::selection {
+    background-color: hsl(var(--selection-color));
+    color: hsl(var(--background));
 }
