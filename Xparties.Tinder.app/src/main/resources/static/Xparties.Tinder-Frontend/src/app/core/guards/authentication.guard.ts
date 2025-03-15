@@ -11,7 +11,7 @@ export const AuthenticationGuard = () => {
     return authenticationService.checkAuthentication().subscribe({
         next: (authenticated) => {
             if (!authenticated) {
-                router.navigate(['']);
+                router.navigate(['/login']);
                 return false;
             }
             return true;

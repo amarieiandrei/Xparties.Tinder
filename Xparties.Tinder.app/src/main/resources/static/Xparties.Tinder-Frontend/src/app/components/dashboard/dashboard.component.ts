@@ -10,7 +10,6 @@ import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/h
   selector: 'xpt-dashboard',
   imports: [EventsComponent, CommonModule, HlmButtonDirective],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
 
