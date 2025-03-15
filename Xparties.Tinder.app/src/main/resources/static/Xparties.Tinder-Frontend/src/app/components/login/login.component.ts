@@ -1,53 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { HlmSwitchComponent } from '../../../../libs/ui/ui-switch-helm/src/lib/hlm-switch.component';
 
+// directives
 import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
+import { HlmLabelDirective } from '../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
+
+// icons
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faFacebook, faGithub, faGoogle, faThreads } from '@fortawesome/free-brands-svg-icons';
+
+// modules
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+// services
+import { ThemeService } from '../../core/services/theme.service';
 
 @Component({
   selector: 'app-login',
-  imports: [HlmButtonDirective, CommonModule],
+  imports: [CommonModule, FontAwesomeModule, HlmButtonDirective, HlmSwitchComponent, HlmLabelDirective],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  faGoogle: IconDefinition = faGoogle;
+  faFacebook: IconDefinition = faFacebook;
+  faGithub: IconDefinition = faGithub;
+  faThreads: IconDefinition = faThreads;
 
-  data: any;  // To store the fetched data
-  errorMessage: string = '';  // To store any error message
+  private _themeService = inject(ThemeService);
+
+  currentTheme = this._themeService.getCurrentThemeSignal();
 
   constructor() { }
 
-  ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.fetchData();
-    // }, 5000);
+  toggleTheme(): void {
+    this._themeService.toggleTheme();
   }
-
-  fetchData(): void {
-    // const apiUrl = 'https://www.xpartiestinder.com/person/persons';  // Replace with your API URL
-    // investigate
-    const apiUrl = 'http://localhost:8080/person/persons';  // Replace with your API URL
-
-    fetch(apiUrl, {
-      method: 'GET',  // or 'POST', 'PUT', etc.
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'   // Set content type for request body if needed
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();  // Parse JSON data
-      })
-      .then(data => {
-        this.data = data;  // Store the response data
-        console.log(this.data);
-      })
-      .catch(error => {
-        this.errorMessage = 'There was an error fetching the data: ' + error.message;
-        console.error('Error:', error);
-      });
-  }
-
 }

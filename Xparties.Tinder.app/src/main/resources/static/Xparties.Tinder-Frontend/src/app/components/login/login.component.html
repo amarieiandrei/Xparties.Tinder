@@ -1,46 +1,60 @@
-<div class="max-w-sm mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-    <div class="grid p-4">
-        <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">Log in to Xparties.Tinder</h2>
+<div class="flex flex-col items-center p-4 space-y-6 sm:p-8 lg:p-12 xl:p-16">
+    <div class="flex items-center mt-32 relative">
+        <img src="../../assets/logos/second-logo.png" alt="Application Logo"
+            class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32">
+        <span
+            class="text-3xl font-semibold sm:text-4xl md:text-5xl lg:text-6xl ml-[-1.5rem] sm:ml-[-2rem] md:ml-[-2.5rem] lg:ml-[-3rem]">
+            partiestinder
+        </span>
+    </div>
 
-        <div class="flex flex-col space-y-2">
-            <!-- Google Login Button -->
-            <!-- https://xparties-tinder.onrender.com/oauth2/authorization/google -->
-            <!-- http://localhost:8080/oauth2/authorization/google -->
-            <!-- https://api.xpartiestinder.com/oauth2/authorization/google -->
-            <a hlmBtn href="http://localhost:8080/oauth2/authorization/google">
-                Sign in with Google
-            </a>
+    <h2 class="text-lg font-semibold text-center sm:text-xl md:text-2xl lg:text-3xl">Welcome to xpartiestinder</h2>
 
-            <!-- GitHub Login Button -->
-            <!-- https://xparties-tinder.onrender.com/oauth2/authorization/github -->
-            <!-- http://localhost:8080/oauth2/authorization/github -->
-            <!-- https://api.xpartiestinder.com/oauth2/authorization/github -->
-            <a hlmBtn href="http://localhost:8080/oauth2/authorization/github">
-                Sign in with GitHub
-            </a>
-
-            <!-- Facebook Login Button -->
-            <!-- https://xparties-tinder.onrender.com/oauth2/authorization/facebook -->
-            <!-- http://localhost:8080/oauth2/authorization/facebook -->
-            <!-- https://api.xpartiestinder.com/oauth2/authorization/facebook -->
-            <a hlmBtn href="http://localhost:8080/oauth2/authorization/facebook">
-                Sign in with Facebook
-            </a>
-
-            <!-- Threads Login Button -->
-            <!-- https://xparties-tinder.onrender.com/oauth2/authorization/threads -->
-            <!-- http://localhost:8080/oauth2/authorization/threads -->
-            <!-- https://api.xpartiestinder.com/oauth2/authorization/threads -->
-            <!-- <a hlmBtn href="http://localhost:8080/oauth2/authorization/threads">
-                Sign in with Threads
-            </a> -->
-        </div>
+    <div class="flex flex-col space-y-4 w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+        <a hlmBtn href="http://localhost:8080/oauth2/authorization/google" class="flex items-center space-x-2">
+            <fa-icon [icon]="faGoogle" class="text-lg"></fa-icon>
+            <span class="font-semibold">Sign in with Google</span>
+        </a>
+        <a hlmBtn href="http://localhost:8080/oauth2/authorization/github" class="flex items-center space-x-2">
+            <fa-icon [icon]="faGithub" class="text-lg"></fa-icon>
+            <span class="font-semibold">Sign in with GitHub</span>
+        </a>
+        <a hlmBtn href="http://localhost:8080/oauth2/authorization/facebook" class="flex items-center space-x-2">
+            <fa-icon [icon]="faFacebook" class="text-lg"></fa-icon>
+            <span class="font-semibold">Sign in with Facebook</span>
+        </a>
+        <a hlmBtn href="http://localhost:8080/oauth2/authorization/threads" class="flex items-center space-x-2">
+            <fa-icon [icon]="faThreads" class="text-lg"></fa-icon>
+            <span class="font-semibold">Sign in with Threads</span>
+        </a>
     </div>
 </div>
 
-<div>
-    <br />
-    <button hlmBtn (click)="fetchData()">Click Fetch Persons</button>
-    <h3>Fetched Data:</h3>
-    <pre>{{ data | json }}</pre>
+<div class="absolute top-4 right-6">
+    <label class="flex items-center font-semibold" hlmLabel>
+        <hlm-switch class="mr-2" (click)="toggleTheme()" />
+        {{currentTheme()}} Theme
+    </label>
 </div>
+
+<!-- Authentication URLs -->
+
+<!-- Google Login Button -->
+<!-- https://xparties-tinder.onrender.com/oauth2/authorization/google -->
+<!-- http://localhost:8080/oauth2/authorization/google -->
+<!-- https://api.xpartiestinder.com/oauth2/authorization/google -->
+
+<!-- GitHub Login Button -->
+<!-- https://xparties-tinder.onrender.com/oauth2/authorization/github -->
+<!-- http://localhost:8080/oauth2/authorization/github -->
+<!-- https://api.xpartiestinder.com/oauth2/authorization/github -->
+
+<!-- Facebook Login Button -->
+<!-- https://xparties-tinder.onrender.com/oauth2/authorization/facebook -->
+<!-- http://localhost:8080/oauth2/authorization/facebook -->
+<!-- https://api.xpartiestinder.com/oauth2/authorization/facebook -->
+
+<!-- Threads Login Button -->
+<!-- https://xparties-tinder.onrender.com/oauth2/authorization/threads -->
+<!-- http://localhost:8080/oauth2/authorization/threads -->
+<!-- https://api.xpartiestinder.com/oauth2/authorization/threads -->

@@ -4,3 +4,4 @@
 - Github copilot
 - Handle the errors in UI
 - Decide the global font style for the application
+- Try to see if can import fontawesome globaly to avoid importing in every component
