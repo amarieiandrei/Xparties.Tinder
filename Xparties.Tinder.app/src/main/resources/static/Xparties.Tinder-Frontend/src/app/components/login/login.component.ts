@@ -22,6 +22,7 @@ import { ThemeService } from '../../core/services/theme.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
+  // icons
   faGoogle: IconDefinition = faGoogle;
   faFacebook: IconDefinition = faFacebook;
   faGithub: IconDefinition = faGithub;

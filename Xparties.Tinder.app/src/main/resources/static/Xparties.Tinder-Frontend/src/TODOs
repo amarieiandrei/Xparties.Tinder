@@ -5,3 +5,6 @@
 - Handle the errors in UI
 - Decide the global font style for the application
 - Try to see if can import fontawesome globaly to avoid importing in every component
+- Try to think how to load pages and make nice animations
+- handle cookies policies ( take a look beach please festival )
+-
