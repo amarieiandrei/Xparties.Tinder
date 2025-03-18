@@ -5,9 +5,21 @@ import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal } fr
 import { EventService } from './services/event.service';
 import { AuthenticationService } from '../../../../core/services/authentication.service';
 
+// directives
+import { HlmButtonDirective } from '../../../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
+import { HlmToggleDirective } from '../../../../../../libs/ui/ui-toggle-helm/src/lib/hlm-toggle.directive';
+import { BrnToggleDirective } from '@spartan-ng/brain/toggle';
+
 @Component({
   selector: 'xpt-events',
-  imports: [CommonModule],
+  imports: [
+    // modules
+    CommonModule,
+    // directives
+    HlmButtonDirective,
+    HlmToggleDirective,
+    BrnToggleDirective,
+  ],
   templateUrl: './events.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush // ✅ Improves performance
 })
