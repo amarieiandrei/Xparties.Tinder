@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { HlmSwitchComponent } from '../../../../libs/ui/ui-switch-helm/src/lib/hlm-switch.component';
+import { HlmSwitchComponent } from '../../../../../libs/ui/ui-switch-helm/src/lib/hlm-switch.component';
 
 // directives
-import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
-import { HlmLabelDirective } from '../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
+import { HlmButtonDirective } from '../../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
+import { HlmLabelDirective } from '../../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
 
 // icons
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // services
-import { ThemeService } from '../../core/services/theme.service';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-login',

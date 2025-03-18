@@ -1,60 +1,19 @@
-<!-- <header>
-    <img src="../../assets/logos/second-logo.png" alt="Application Logo">
-    <span>partiestinder</span>
+<div class="flex flex-col h-screen">
+    <xpt-header />
 
-    <fa-icon [icon]="faBell"></fa-icon>
-</header>
-
-<main>
-    main content
-</main>
-
-<footer>
-    <fa-icon [icon]="faHome"></fa-icon>
-    <fa-icon [icon]="faCalendar"></fa-icon>
-    <fa-icon [icon]="faHeart"></fa-icon>
-    <fa-icon [icon]="faComment"></fa-icon>
-    <fa-icon [icon]="faUser"></fa-icon>
-</footer> -->
-
-<header class="flex justify-between items-center p-4 fixed w-full top-0 z-10">
-    <div class="flex items-center relative">
-        <img src="../../assets/logos/second-logo.png" alt="Application Logo"
-            class="w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-20 lg:h-20">
-        <span
-            class="text-xl font-semibold sm:text-xl md:text-xl lg:text-2xl ml-[-1.25rem] sm:ml-[-1.25rem] md:ml-[-1.25rem] lg:ml-[-1.75rem]">
-            partiestinder
-        </span>
+    <div class="flex-1 overflow-auto mt-[4rem] mb-[4rem] p-4 lg:mt-[6rem] lg:mb-[6rem]">
+        <router-outlet></router-outlet>
     </div>
-    <fa-icon [icon]="faBell" class="text-xl cursor-pointer"></fa-icon>
-</header>
 
-<!-- <main>
-    main content
-</main> -->
+    <xpt-footer />
+</div>
 
-<footer class="flex justify-around items-center p-4 fixed w-full bottom-0 z-10">
-    <fa-icon [icon]="faCalendar" class="text-xl cursor-pointer"></fa-icon>
-    <fa-icon [icon]="faHeart" class="text-xl cursor-pointer"></fa-icon>
-    <fa-icon [icon]="faXmark" class="text-3xl cursor-pointer"></fa-icon>
-    <fa-icon [icon]="faComments" class="text-xl cursor-pointer"></fa-icon>
-    <fa-icon [icon]="faUser" class="text-xl cursor-pointer"></fa-icon>
-</footer>
-
-<!-- <div class="absolute top-20 right-28">
+<!-- <div class="absolute top-28 right-36">
     <label class="flex items-center font-semibold" hlmLabel>
         <hlm-switch class="mr-2" (click)="toggleTheme()" />
         {{currentTheme()}} Theme
     </label>
 </div> -->
-
-<!-- Template design ideas -->
-<!-- This should be a separate component from my point of view -->
-<!-- HEADER -->
-<!-- This should render a component which are selected from the bottom of navbar, home, events, matches, chat, profile, from my point of view -->
-<!-- MAIN -->
-<!-- This should be a separate component from my point of view -->
-<!-- FOOTER -->
 
 <!-- INFO -->
 <!-- 

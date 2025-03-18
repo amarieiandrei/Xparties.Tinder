@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
-import { WelcomeComponent } from './components/welcome/welcome.component';
+import { WelcomeComponent } from './components/authentication/welcome/welcome.component';
 
 export const routes: Routes = [
     {
@@ -10,17 +10,13 @@ export const routes: Routes = [
     },
     {
         path: 'login',
-        loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
+        loadComponent: () => import('./components/authentication/login/login.component').then(m => m.LoginComponent)
     },
     {
         path: 'dashboard',
-        loadComponent: () => import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
+        loadChildren: () => import('./components/dashboard/dashboard.routes').then(m => m.dashboardRoutes),
         // TODO: Comment until the template ready
         // canActivate: [AuthenticationGuard]
-    },
-    {
-        path: 'events',
-        loadComponent: () => import('./components/events/events.component').then(m => m.EventsComponent)
     },
     {
         path: '**',

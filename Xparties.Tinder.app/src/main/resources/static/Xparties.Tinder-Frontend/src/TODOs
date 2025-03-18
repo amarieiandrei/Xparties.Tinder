@@ -7,4 +7,9 @@
 - Try to see if can import fontawesome globaly to avoid importing in every component
 - Try to think how to load pages and make nice animations
 - handle cookies policies ( take a look beach please festival )
--
+- Good architecture with module for dashboard which contains header, main ( dinamyc content ), footer
+- tinder animation whne switching the main content using footer
+- GREAT WORK TODAY :)
+- Style header cool
+- style footer cool
+- style events cool

@@ -1,11 +1,11 @@
 import { Component, effect, inject, signal } from '@angular/core';
 
 // components
+import { HeaderComponent } from '../shared/header/header.component';
+import { FooterComponent } from '../shared/footer/footer.component';
 import { HlmSwitchComponent } from '../../../../libs/ui/ui-switch-helm/src/lib/hlm-switch.component';
-import { EventsComponent } from '../events/events.component';
 
 // directives
-import { HlmButtonDirective } from '../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
 import { HlmLabelDirective } from '../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
 
 // interfaces
@@ -17,28 +17,24 @@ import { ThemeService } from '../../core/services/theme.service';
 
 // modules
 import { CommonModule } from '@angular/common';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-// icons
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faBell, faCalendar, faComments, faHeart, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'xpt-dashboard',
-  imports: [EventsComponent, CommonModule, FontAwesomeModule, HlmButtonDirective, HlmSwitchComponent, HlmLabelDirective],
+  imports: [
+    // components
+    HeaderComponent,
+    FooterComponent,
+    HlmSwitchComponent,
+    // modules
+    CommonModule,
+    RouterModule,
+    // directives
+    HlmLabelDirective,
+  ],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
-  // icons
-  // header
-  faBell: IconDefinition = faBell;
-  // footbar
-  faXmark: IconDefinition = faXmark;
-  faCalendar: IconDefinition = faCalendar;
-  faHeart: IconDefinition = faHeart;
-  faComments: IconDefinition = faComments;
-  faUser: IconDefinition = faUser;
-
   private authenticationService = inject(AuthenticationService);
   private _themeService = inject(ThemeService);
 
