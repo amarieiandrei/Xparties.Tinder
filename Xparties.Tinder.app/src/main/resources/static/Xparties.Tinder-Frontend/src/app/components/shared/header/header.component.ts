@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 // components
 import { HlmSwitchComponent } from '../../../../../libs/ui/ui-switch-helm/src/lib/hlm-switch.component';
@@ -27,7 +27,6 @@ import { ThemeService } from '../../../core/services/theme.service';
     HlmLabelDirective,
   ],
   templateUrl: './header.component.html',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HeaderComponent {
   // icons
