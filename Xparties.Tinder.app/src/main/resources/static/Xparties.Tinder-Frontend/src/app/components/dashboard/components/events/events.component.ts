@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal } from '@angular/core';
 
+// components
+import { HlmSkeletonComponent } from '../../../../../../libs/ui/ui-skeleton-helm/src/lib/hlm-skeleton.component';
+
 // services
 import { EventService } from './services/event.service';
 import { AuthenticationService } from '../../../../core/services/authentication.service';
 
 // directives
 import { HlmButtonDirective } from '../../../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
-import { HlmSkeletonComponent } from '@spartan-ng/ui-skeleton-helm';
 
 @Component({
   selector: 'xpt-events',

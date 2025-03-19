@@ -1,10 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 
 // components
-import { HlmSwitchComponent } from '@spartan-ng/ui-switch-helm';
+import { HlmSwitchComponent } from '../../../../../libs/ui/ui-switch-helm/src/lib/hlm-switch.component';
 
 // directives
-import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
+import { HlmLabelDirective } from '../../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
 
 // modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
