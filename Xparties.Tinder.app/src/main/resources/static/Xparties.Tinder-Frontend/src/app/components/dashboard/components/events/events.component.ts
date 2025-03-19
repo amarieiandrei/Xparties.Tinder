@@ -7,8 +7,7 @@ import { AuthenticationService } from '../../../../core/services/authentication.
 
 // directives
 import { HlmButtonDirective } from '../../../../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
-import { HlmToggleDirective } from '../../../../../../libs/ui/ui-toggle-helm/src/lib/hlm-toggle.directive';
-import { BrnToggleDirective } from '@spartan-ng/brain/toggle';
+import { HlmSkeletonComponent } from '@spartan-ng/ui-skeleton-helm';
 
 @Component({
   selector: 'xpt-events',
@@ -17,8 +16,8 @@ import { BrnToggleDirective } from '@spartan-ng/brain/toggle';
     CommonModule,
     // directives
     HlmButtonDirective,
-    HlmToggleDirective,
-    BrnToggleDirective,
+    // components
+    HlmSkeletonComponent,
   ],
   templateUrl: './events.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush // ✅ Improves performance
@@ -27,7 +26,10 @@ export class EventsComponent implements OnInit {
   private eventService = inject(EventService);
   private authenticationService = inject(AuthenticationService);
 
-  // Refactoring to have object of page not only the array, will be usefull in the future 
+  isBusy = signal<boolean>(true);
+
+  // TODO: Remove, only for testing purpose 
+  events2 = signal<any>([]);
   events = signal<any>([
     { name: 'Beach Please 2025', category: 'Music', date: '2025-08-18' },
     { name: 'Beach Please 2025', category: 'Music', date: '2025-08-18' },
@@ -66,9 +68,19 @@ export class EventsComponent implements OnInit {
     // })
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isBusy.set(false);
+    }, 2000);
+  }
 
   loadEvents(): void {
-    this.eventService.getAllEvents().subscribe(events => { this.events.set(events.content); });
+    this.eventService.getAllEvents().subscribe({
+      next: events => {
+        this.events.set(events?.content);
+        this.isBusy.set(false);
+      },
+      error: () => this.isBusy.set(false)
+    });
   }
 }

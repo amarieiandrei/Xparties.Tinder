@@ -27,6 +27,9 @@
       ],
       "@spartan-ng/ui-toggle-helm": [
         ".\\libs/ui/ui-toggle-helm/src/index.ts"
+      ],
+      "@spartan-ng/ui-skeleton-helm": [
+        ".\\libs/ui/ui-skeleton-helm/src/index.ts"
       ]
     }
   },

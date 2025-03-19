@@ -31,6 +31,7 @@
 --destructive-foreground: 210 20% 98%;
 --ring: 224 71.4% 4.1%;
 --radius: 0.5rem;
+--shadow-color: 0 0% 0% / 0.2;
 color-scheme: light;
 }
 
@@ -54,6 +55,7 @@ color-scheme: light;
 --destructive: 0 62.8% 30.6%;
 --destructive-foreground: 210 20% 98%;
 --ring: 216 12.2% 83.9%;
+--shadow-color: 0 0% 100% / 0.1;
 color-scheme: dark;
 }
 
@@ -68,6 +70,10 @@ body {
     * {
         @apply border-border;
     }
+}
+
+.shadow-custom {
+    box-shadow: 0 4px 8px -2px hsl(var(--shadow-color));
 }
 
 ::selection {
