@@ -1,23 +1,23 @@
-<div xptRipple class="flex justify-around items-center p-2 fixed w-full bottom-0 z-10 border-t">
-    <div class="relative">
-        <fa-icon [routerLink]="['/dashboard/events']" routerLinkActive="active" [icon]="faCalendar"
-            class="text-xl cursor-pointer"></fa-icon>
+<div class="flex justify-around items-center fixed w-full bottom-0 z-10 border-t">
+    <div class="p-4 lg:p-6">
+        <fa-icon xptRipple [routerLink]="['/dashboard/events']" routerLinkActive="active" [icon]="faCalendar"
+            class="text-xl lg:text-2xl cursor-pointer"></fa-icon>
     </div>
-    <div class="relative">
-        <fa-icon [routerLink]="['/dashboard/matches']" routerLinkActive="active" [icon]="faHeart"
-            class="text-xl cursor-pointer"></fa-icon>
+    <div class="p-4 lg:p-6">
+        <fa-icon xptRipple [routerLink]="['/dashboard/matches']" routerLinkActive="active" [icon]="faHeart"
+            class="text-xl lg:text-2xl cursor-pointer"></fa-icon>
     </div>
-    <div [routerLink]="['/dashboard/home']" routerLinkActive="active"
-        class="relative flex justify-center items-center w-12 h-12 rounded-full shadow-custom cursor-pointer">
-        <img class="w-12 h-12 transition-transform duration-300 hover:scale-110"
-            src="../../../assets/logos/second-logo.png" alt="Logo">
+    <div xptRipple class="p-4 lg:p-6" [routerLink]="['/dashboard/home']" routerLinkActive="active"
+        class=" flex justify-center items-center w-12 h-12 lg:w-20 lg:h-20 rounded-full shadow-custom cursor-pointer">
+        <img class="w-12 h-12 lg:w-20 lg:h-20 transition-transform duration-300 hover:scale-110"
+            src="../../../assets/logos/second-logo.png" alt="Application Logo" />
     </div>
-    <div class="relative">
-        <fa-icon [routerLink]="['/dashboard/chat']" routerLinkActive="active" [icon]="faComments"
-            class="text-xl cursor-pointer"></fa-icon>
+    <div class="p-4 lg:p-6">
+        <fa-icon xptRipple [routerLink]="['/dashboard/chat']" routerLinkActive="active" [icon]="faComments"
+            class="text-xl lg:text-2xl cursor-pointer"></fa-icon>
     </div>
-    <div class="relative">
-        <fa-icon [routerLink]="['/dashboard/profile']" routerLinkActive="active" [icon]="faUser"
-            class="text-xl cursor-pointer"></fa-icon>
+    <div class="p-4 lg:p-6">
+        <fa-icon xptRipple [routerLink]="['/dashboard/profile']" routerLinkActive="active" [icon]="faUser"
+            class="text-xl lg:text-2xl cursor-pointer"></fa-icon>
     </div>
 </div>
