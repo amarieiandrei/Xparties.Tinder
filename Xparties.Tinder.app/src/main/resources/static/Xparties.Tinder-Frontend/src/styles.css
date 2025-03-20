@@ -80,3 +80,27 @@ body {
     background-color: hsl(var(--selection-color));
     color: hsl(var(--background));
 }
+
+/* Animations */
+
+.ripple-effect {
+    position: absolute;
+    /* border-radius: 50%; */
+    background: rgba(255, 255, 255, 0.7); 
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+    width: 100px; 
+    height: 100px; 
+}
+
+.Light .ripple-effect {
+    background: hsl(var(--foreground));
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4); 
+        opacity: 0;
+    }
+}

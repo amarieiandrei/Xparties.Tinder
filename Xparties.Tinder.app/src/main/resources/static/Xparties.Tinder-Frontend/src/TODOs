@@ -16,3 +16,6 @@
 - USE SKELETON FROM SPARTAN UI
 - USE SONNER FROM SPARTAN UI LOVE
 - Can create a message system with subjects and observable, this is super nice thing to do, I know perfect
+- server side rendering & hydration
+- Use Inputs new school
+- Folder architecture to have a styles folder with colors file, animations files, fonts files

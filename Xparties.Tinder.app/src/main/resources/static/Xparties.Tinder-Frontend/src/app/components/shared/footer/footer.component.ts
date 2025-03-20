@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 
+// directives
+import { RippleDirective } from '../../../shared/directives/ripple.directive';
+
 // modules
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -12,8 +16,11 @@ import { faCalendar, faComments, faHeart, faUser, faXmark } from '@fortawesome/f
   selector: 'xpt-footer',
   imports: [
     // modules
+    // CommonModule,
     RouterModule,
     FontAwesomeModule,
+    // directives
+    RippleDirective
   ],
   templateUrl: './footer.component.html',
 })
