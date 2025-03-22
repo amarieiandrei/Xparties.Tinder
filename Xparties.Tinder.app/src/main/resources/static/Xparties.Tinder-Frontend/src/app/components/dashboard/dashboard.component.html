@@ -1,8 +1,13 @@
 <div class="flex flex-col h-screen">
     <xpt-header />
 
-    <div class="flex-1 overflow-auto mt-[2rem] mb-[4rem] lg:mt-[4rem] lg:mb-[5rem]">
-        <router-outlet></router-outlet>
+    <!-- TODO: Change this -> p-10 -->
+    <div class="flex-1 overflow-auto mt-[2rem] mb-[4rem] lg:mt-[4rem] lg:mb-[5rem] p-10">
+        <div class="overflow-hidden">
+            <div [@routeAnimations]="currentRoute">
+                <router-outlet #outlet="outlet"></router-outlet>
+            </div>
+        </div>
     </div>
 
     <xpt-footer />

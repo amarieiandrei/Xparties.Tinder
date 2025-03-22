@@ -1,4 +1,9 @@
 import { Component, effect, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
+
+// animations
+import { slideAnimation } from '../../shared/animations/fade.animation';
 
 // components
 import { HeaderComponent } from '../shared/header/header.component';
@@ -14,7 +19,6 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 
 // modules
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'xpt-dashboard',
@@ -28,17 +32,27 @@ import { RouterModule } from '@angular/router';
     // directives
   ],
   templateUrl: './dashboard.component.html',
+  animations: [slideAnimation]
 })
 export class DashboardComponent {
-  private authenticationService = inject(AuthenticationService);
+  private _authenticationService = inject(AuthenticationService);
+
+  currentRoute: string = '';
 
   currentUser = signal<User | null>(null);
 
-  constructor() {
+  constructor(private _router: Router) {
     effect(() => {
-      if (this.authenticationService.isAuthenticated()) {
-        this.authenticationService.getCurrentUser().subscribe(currentUser => this.currentUser.set(currentUser));
+      if (this._authenticationService.isAuthenticated()) {
+        this._authenticationService.getCurrentUser().subscribe(currentUser => this.currentUser.set(currentUser));
       }
-    })
+    });
+
+    // Avoid console errors during applying animation on different routes / components
+    this._router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.currentRoute = event.urlAfterRedirects.split('/').pop() || '';
+    });
   }
 }

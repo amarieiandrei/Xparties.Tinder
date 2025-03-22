@@ -11,7 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // icons
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
 // services
 import { ThemeService } from '../../../core/services/theme.service';
@@ -30,6 +30,9 @@ import { ThemeService } from '../../../core/services/theme.service';
 })
 export class HeaderComponent {
   // icons
+  // TODO: Use these icons to have a nicer design of theme button please
+  faSun: IconDefinition = faSun;
+  faMoon: IconDefinition = faMoon;
   faBell: IconDefinition = faBell;
 
   // services
