@@ -30,7 +30,14 @@ export const dashboardRoutes: Routes = [
             {
                 path: 'profile',
                 loadComponent: () => import('./components/profile/profile.component').then(m => m.ProfileComponent),
-                data: { animation: 'Profile' }
+                data: { animation: 'Profile' },
+                children: [
+                    {
+                        path: 'edit',
+                        loadComponent: () => import('./components/profile/edit-profile/edit-profile.component').then(m => m.EditProfileComponent),
+                        data: { animation: 'EditProfile' }
+                    }
+                ]
             }
         ]
     }
