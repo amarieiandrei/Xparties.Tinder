@@ -3,7 +3,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 
 // animations
-import { slideAnimation } from '../../shared/animations/fade.animation';
+import { slideAnimation } from '../../shared/animations/slide.animation';
 
 // components
 import { HeaderComponent } from '../shared/header/header.component';

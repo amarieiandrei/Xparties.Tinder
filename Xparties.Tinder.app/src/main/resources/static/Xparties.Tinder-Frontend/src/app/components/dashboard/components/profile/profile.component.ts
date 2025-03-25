@@ -13,8 +13,7 @@ import { faCircleCheck, faPen } from '@fortawesome/free-solid-svg-icons';
 // modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { slideAnimation } from '../../../../shared/animations/fade.animation';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'xpt-profile',
@@ -31,7 +30,6 @@ import { slideAnimation } from '../../../../shared/animations/fade.animation';
   ],
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush, // ✅ Improves performance
-  animations: [slideAnimation]
 })
 // <!-- <span>Percentage of progress bar</span> -->
 export class ProfileComponent implements OnInit {
@@ -41,25 +39,16 @@ export class ProfileComponent implements OnInit {
 
   // services
   private _router = inject(Router);
-  private _route = inject(ActivatedRoute);
+
   value = 100;
 
-  isEditPage = false;
-  currentRoute = '';
-
-  constructor() {
-    this._router.events.subscribe(() => {
-      this.isEditPage = this._router.url.endsWith('/edit');
-      this.currentRoute = this.isEditPage ? 'EditProfile' : 'Profile';
-    });
-  }
+  constructor() { }
 
   ngOnInit(): void {
     // setTimeout(() => (this.value = 65), 3000);
   }
 
   navigateToEditProfile() {
-    // this._router.navigate(['dashboard/profile/edit']);
-    this._router.navigate(['edit'], { relativeTo: this._route });
+    this._router.navigate(['dashboard/profile/edit']);
   }
 }
