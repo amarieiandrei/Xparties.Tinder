@@ -32,6 +32,7 @@
 --ring: 224 71.4% 4.1%;
 --radius: 0.5rem;
 --shadow-color: 0 0% 0% / 0.2;
+--card-placeholder-background: rgb(234, 235, 239);
 color-scheme: light;
 }
 
@@ -56,6 +57,7 @@ color-scheme: light;
 --destructive-foreground: 210 20% 98%;
 --ring: 216 12.2% 83.9%;
 --shadow-color: 0 0% 100% / 0.1;
+--card-placeholder-background: rgb(33, 37, 46);
 color-scheme: dark;
 }
 

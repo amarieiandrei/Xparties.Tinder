@@ -1,5 +1,40 @@
-<div @slideFromBottomToTop class="fixed bg-red-200 border-2 border-black-200 inset-0 z-50 overflow-auto">
-    <h1>Welcome to My Component!</h1>
-    <p>This component slides from bottom to top on enter and exits with a reverse slide.</p>
-    <button hlmBtn (click)="closeEditProfile()" class="mb-4">Close</button>
+<div @slideFromBottomToTop class="fixed inset-0 z-20 overflow-auto bg-[hsl(var(--background))]">
+    <!-- Header -->
+    <div class="flex items-center space-x-6 p-4 shadow-custom">
+        <fa-icon (click)="closeEditProfile()" [icon]="faArrowLeft"
+            class="cursor-pointer text-pink-500 text-2xl"></fa-icon>
+        <h1 class="text-2xl font-bold">Edit profile</h1>
+    </div>
+
+
+    <div class="p-4">
+        <!-- Media Section -->
+        <h2 class="text-lg font-bold mb-4">Media</h2>
+
+        <ul class="grid grid-cols-3 gap-6">
+            @for ( _ of [1, 2, 3]; track _ ) {
+            <!-- Photo Card -->
+            <li class="relative aspect-[9/14] rounded-lg">
+                <img src="/assets/user-test/user-test-photo.jpg" alt="User Photo"
+                    class="w-full h-full object-cover rounded-lg" />
+                <button
+                    class="absolute -bottom-2 -right-2 w-10 h-10 border border-gray-500 bg-[hsl(var(--background))] opacity-95 rounded-full flex items-center justify-center shadow-custom">
+                    <fa-icon [icon]="faXmark" class="text-gray-500 text-2xl"></fa-icon>
+                </button>
+            </li>
+            }
+
+            <!-- --card-placeholder-background -->
+            <!-- Placeholder Cards -->
+            @for ( _ of [1, 2, 3]; track _ ) {
+            <li
+                class="relative aspect-[9/14] bg-[var(--card-placeholder-background)] rounded-lg border-2 border-gray-500 border-dashed flex items-center justify-center cursor-pointer">
+                <button
+                    class="absolute -bottom-2 -right-2 w-10 h-10 border border-white bg-gradient-to-r from-red-600 to-orange-500 rounded-full flex items-center justify-center">
+                    <fa-icon [icon]="faPlus" class="text-white text-2xl"></fa-icon>
+                </button>
+            </li>
+            }
+        </ul>
+    </div>
 </div>
