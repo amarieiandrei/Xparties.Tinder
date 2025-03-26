@@ -35,4 +35,4 @@ export const HlmSelectImports = [
 	imports: [...HlmSelectImports],
 	exports: [...HlmSelectImports],
 })
-export class HlmSelectModule {}
+export class HlmSelectModule { }

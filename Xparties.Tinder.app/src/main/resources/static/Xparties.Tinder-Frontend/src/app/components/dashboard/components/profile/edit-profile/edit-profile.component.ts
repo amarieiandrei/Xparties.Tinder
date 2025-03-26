@@ -17,7 +17,7 @@ import { faArrowLeft, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 // imports
 import { BrnSelectImports } from '@spartan-ng/brain/select';
-import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
+import { HlmSelectImports, HlmSelectModule } from '@spartan-ng/ui-select-helm';
 
 // services
 import { Router } from '@angular/router';
@@ -36,6 +36,7 @@ import { CommonModule } from '@angular/common';
     HlmInputDirective,
     HlmLabelDirective,
     // modules
+    HlmSelectModule,
     // CommonModule,
     FontAwesomeModule,
     // imports
