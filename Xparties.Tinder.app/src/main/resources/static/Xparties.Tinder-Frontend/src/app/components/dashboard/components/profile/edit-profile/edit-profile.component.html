@@ -2,19 +2,20 @@
     <!-- Header -->
     <div class="flex items-center space-x-6 p-4 shadow-custom">
         <fa-icon (click)="closeEditProfile()" [icon]="faArrowLeft"
-            class="cursor-pointer text-pink-500 text-2xl"></fa-icon>
+            class="cursor-pointer text-red-400 text-2xl"></fa-icon>
         <h1 class="text-2xl font-bold">Edit profile</h1>
     </div>
 
+    <!-- Content -->
+    <div class="p-4 sm:px-16 md:px-32 lg:px-64">
 
-    <div class="p-4">
         <!-- Media Section -->
         <h2 class="text-lg font-bold mb-4">Media</h2>
 
-        <ul class="grid grid-cols-3 gap-6">
+        <ul class="grid grid-cols-3 gap-4">
             @for ( _ of [1, 2, 3]; track _ ) {
             <!-- Photo Card -->
-            <li class="relative aspect-[9/14] rounded-lg">
+            <li class="relative aspect-[9/14] rounded-lg cursor-pointer">
                 <img src="/assets/user-test/user-test-photo.jpg" alt="User Photo"
                     class="w-full h-full object-cover rounded-lg" />
                 <button
@@ -24,7 +25,6 @@
             </li>
             }
 
-            <!-- --card-placeholder-background -->
             <!-- Placeholder Cards -->
             @for ( _ of [1, 2, 3]; track _ ) {
             <li
@@ -36,5 +36,52 @@
             </li>
             }
         </ul>
+
+        <!-- About Me Section -->
+        <h2 class="text-lg font-bold my-4">About Me</h2>
+
+        <textarea class="min-h-[80px] w-full" hlmInput placeholder="About Me"></textarea>
+
+        <!-- Gender Section -->
+        <h2 class="text-lg font-bold my-4">Gender</h2>
+
+        <brn-select class="inline-block" placeholder="Select Gender">
+            <hlm-select-trigger class="w-56">
+                <hlm-select-value />
+            </hlm-select-trigger>
+            <hlm-select-content>
+                <hlm-option value="Man">Man</hlm-option>
+                <hlm-option value="Women">Women</hlm-option>
+            </hlm-select-content>
+        </brn-select>
+
+        <!-- Sexual Orientation Section -->
+        <h2 class="text-lg font-bold my-4">Sexual Orientation</h2>
+
+        <brn-select class="inline-block" placeholder="Select up to 3 Sexual Orientation" [multiple]="true">
+            <hlm-select-trigger class="w-56">
+                <hlm-select-value />
+            </hlm-select-trigger>
+            <hlm-select-content>
+                <hlm-option value="Man">Straight</hlm-option>
+                <hlm-option value="Gay">Gay</hlm-option>
+                <hlm-option value="Lesbian">Lesbian</hlm-option>
+                <hlm-option value="Bisexual">Bisexual</hlm-option>
+                <hlm-option value="Asexual">Asexual</hlm-option>
+                <hlm-option value="Demisexual">Demisexual</hlm-option>
+                <hlm-option value="Pansexual">Pansexual</hlm-option>
+                <hlm-option value="Queer">Queer</hlm-option>
+                <hlm-option value="Questioning">Questioning</hlm-option>
+            </hlm-select-content>
+        </brn-select>
+
+        <!-- Control Your Profile Section -->
+        <h2 class="text-lg font-bold my-4">Control Your Profile</h2>
+
+        <label class="flex items-center" hlmLabel>
+            <hlm-switch class="mr-2" />
+            Don't Show My Age
+        </label>
+
     </div>
 </div>
