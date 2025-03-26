@@ -35,7 +35,7 @@ export const dashboardRoutes: Routes = [
                     {
                         path: 'edit',
                         loadComponent: () => import('./components/profile/edit-profile/edit-profile.component').then(m => m.EditProfileComponent),
-                        data: { animation: 'EditProfile' }
+                        data: { animation: 'EditProfile', noProfileAnimation: true }
                     }
                 ]
             }

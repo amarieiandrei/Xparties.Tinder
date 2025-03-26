@@ -35,10 +35,10 @@ import { CommonModule } from '@angular/common';
   animations: [slideAnimation]
 })
 export class DashboardComponent {
+  // services
   private _authenticationService = inject(AuthenticationService);
 
   currentRoute: string = '';
-
   currentUser = signal<User | null>(null);
 
   constructor(private _router: Router) {
@@ -48,11 +48,12 @@ export class DashboardComponent {
       }
     });
 
-    // Avoid console errors during applying animation on different routes / components
     this._router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.currentRoute = event.urlAfterRedirects.split('/').pop() || '';
+      if (!event.urlAfterRedirects.includes('profile/edit')) {
+        this.currentRoute = event.urlAfterRedirects.split('/').pop() || '';
+      }
     });
   }
 }

@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+
+// animations
+import { slideFromBottomToTop } from '../../../../shared/animations/slide-bottom-to-top.animation';
 
 // components
 import { BrnProgressComponent, BrnProgressIndicatorComponent } from '@spartan-ng/brain/progress';
@@ -23,16 +26,16 @@ import { Router, RouterModule } from '@angular/router';
     FontAwesomeModule,
     RouterModule,
     // components
-    BrnProgressComponent,
-    BrnProgressIndicatorComponent,
+    // BrnProgressComponent,
+    // BrnProgressIndicatorComponent,
     // directives
-    HlmProgressIndicatorDirective,
+    // HlmProgressIndicatorDirective,
   ],
   templateUrl: './profile.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush, // ✅ Improves performance
+  animations: [slideFromBottomToTop]
 })
-// <!-- <span>Percentage of progress bar</span> -->
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   // icons
   faPen: IconDefinition = faPen;
   faCircleCheck: IconDefinition = faCircleCheck;
@@ -40,15 +43,18 @@ export class ProfileComponent implements OnInit {
   // services
   private _router = inject(Router);
 
+  // TODO: PROGRESS BAR IN THE FUTURE
   value = 100;
 
   constructor() { }
 
-  ngOnInit(): void {
-    // setTimeout(() => (this.value = 65), 3000);
-  }
+  ngOnInit(): void { }
 
   navigateToEditProfile() {
     this._router.navigate(['dashboard/profile/edit']);
+  }
+
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy - profile');
   }
 }
