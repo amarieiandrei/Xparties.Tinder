@@ -9,7 +9,8 @@ import { HlmSwitchComponent } from '../../../../../../../libs/ui/ui-switch-helm/
 // directives
 // import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 import { HlmInputDirective } from '../../../../../../../libs/ui/ui-input-helm/src/lib/hlm-input.directive';
-import { HlmLabelDirective } from '../../../../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
+// import { HlmLabelDirective } from '../../../../../../../libs/ui/ui-label-helm/src/lib/hlm-label.directive';
+import { HlmLabelDirective } from '@spartan-ng/ui-label-helm';
 
 // icons
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -17,7 +18,7 @@ import { faArrowLeft, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 // imports
 import { BrnSelectImports } from '@spartan-ng/brain/select';
-import { HlmSelectImports, HlmSelectModule } from '@spartan-ng/ui-select-helm';
+import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 // services
 import { Router } from '@angular/router';
@@ -36,7 +37,6 @@ import { CommonModule } from '@angular/common';
     HlmInputDirective,
     HlmLabelDirective,
     // modules
-    HlmSelectModule,
     // CommonModule,
     FontAwesomeModule,
     // imports
