@@ -10,7 +10,7 @@ export class PhotoService {
 
     constructor() { }
 
-    uploadPhoto(file: File): Observable<string> {
+    uploadPhoto(file: File): Observable<any> {
         const formData = new FormData();
         formData.append("data", file);
 

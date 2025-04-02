@@ -65,6 +65,7 @@ export class EditProfileComponent implements OnDestroy {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
+      this.uploadFile();
     }
   }
 
@@ -73,9 +74,6 @@ export class EditProfileComponent implements OnDestroy {
       alert('Please select a file first.');
       return;
     }
-
-    // let formData = new FormData();
-    // formData.append("data", this.selectedFile);
 
     this._photoService.uploadPhoto(this.selectedFile).subscribe({
       next: res => alert(`GOOD: ${res}`),
