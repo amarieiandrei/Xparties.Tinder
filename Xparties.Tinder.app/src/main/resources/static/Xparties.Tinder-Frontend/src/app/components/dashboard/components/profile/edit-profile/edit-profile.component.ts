@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, QueryList, ViewChildren } from '@angular/core';
 
 // animations
 import { slideFromBottomToTop } from '../../../../../shared/animations/slide-bottom-to-top.animation';
@@ -22,6 +22,7 @@ import { HlmSelectImports } from '@spartan-ng/ui-select-helm';
 
 // services
 import { Router } from '@angular/router';
+import { PhotoService } from '../../../../../core/services/photo.service';
 
 // modules
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -54,10 +55,39 @@ export class EditProfileComponent implements OnDestroy {
 
   // services
   private _router = inject(Router);
-
-
+  private _photoService = inject(PhotoService);
 
   constructor() { }
+
+  selectedFile?: any;
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  uploadFile() {
+    if (!this.selectedFile) {
+      alert('Please select a file first.');
+      return;
+    }
+
+    // let formData = new FormData();
+    // formData.append("data", this.selectedFile);
+
+    this._photoService.uploadPhoto(this.selectedFile).subscribe({
+      next: res => alert(`GOOD: ${res}`),
+      error: () => alert('Upload failed.')
+    });
+  }
+
+  getAllPhotos() {
+    this._photoService.getAllPhotos().subscribe(res => {
+      console.log('res -> ', res);
+    })
+  }
 
   closeEditProfile() {
     this._router.navigate(['/dashboard/profile']);

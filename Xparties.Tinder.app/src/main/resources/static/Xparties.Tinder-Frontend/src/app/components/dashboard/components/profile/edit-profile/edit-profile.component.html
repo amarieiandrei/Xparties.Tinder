@@ -25,11 +25,15 @@
             </li>
             }
 
+            <input id="fileupload" type="file" name="fileupload" />
+
             <!-- Placeholder Cards -->
             @for ( _ of [1, 2, 3]; track _ ) {
             <li
                 class="relative aspect-[9/14] bg-[var(--card-placeholder-background)] rounded-lg border-2 border-gray-500 border-dashed flex items-center justify-center cursor-pointer">
-                <button
+                <input #fileInput type="file" (change)="onFileSelected($event)" />
+                <button (click)="getAllPhotos()">gunoi</button>
+                <button (click)="uploadFile()"
                     class="absolute -bottom-2 -right-2 w-10 h-10 border border-white bg-gradient-to-r from-red-600 to-orange-500 rounded-full flex items-center justify-center">
                     <fa-icon [icon]="faPlus" class="text-white text-2xl"></fa-icon>
                 </button>

@@ -24,7 +24,7 @@ export class HttpService {
     post<T>(url: string, body: any): Observable<T> {
         return this.http.post<T>(`${this.baseUrl}${url}`, body, {
             withCredentials: true,
-            headers: this.getHeaders(),
+            headers: this.getHeaders(body),
         });
     }
 
@@ -42,9 +42,16 @@ export class HttpService {
         });
     }
 
-    private getHeaders(): HttpHeaders {
-        return new HttpHeaders({
-            'Content-Type': 'application/json'
-        })
+    private getHeaders(body?: any): HttpHeaders {
+        let headers = new HttpHeaders({
+            'Accept': 'application/json'
+        });
+
+        // If the body is NOT FormData, set Content-Type to application/json
+        if (!(body instanceof FormData)) {
+            headers = headers.set('Content-Type', 'application/json');
+        }
+
+        return headers;
     }
 }
