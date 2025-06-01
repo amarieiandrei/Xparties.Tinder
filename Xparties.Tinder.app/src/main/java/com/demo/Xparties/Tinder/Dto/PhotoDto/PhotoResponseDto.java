@@ -16,4 +16,6 @@ public class PhotoResponseDto {
     private String fileName;
 
     private String contentType;
+
+    private byte[] data;
 }

@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
-@RequestMapping("/photo")
+@RequestMapping("/api/photo")
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PhotoController {
