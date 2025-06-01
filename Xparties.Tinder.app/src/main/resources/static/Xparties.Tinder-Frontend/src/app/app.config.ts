@@ -14,10 +14,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faFacebook, faGithub, faGoogle, faThreads } from '@fortawesome/free-brands-svg-icons';
-import { faCalendar, faHeart, faUser, faBell, faComments, faXmark, faSun, faMoon, faPen, faCircleCheck, faArrowLeft, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faHeart, faUser, faBell, faComments, faXmark, faSun, faMoon, faPen, faCircleCheck, faArrowLeft, faPlus, faLocationDot, faUsers, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 // Add icons to the FontAwesome library (optional, but useful for performance)
-library.add(faGoogle, faFacebook, faGithub, faThreads, faXmark, faCalendar, faHeart, faComments, faUser, faBell, faSun, faMoon, faPen, faCircleCheck, faArrowLeft, faPlus);
+library.add(faGoogle, faFacebook, faGithub, faThreads, faXmark, faCalendar, faHeart, faComments, faUser, faBell, faSun, faMoon, faPen, faCircleCheck, faArrowLeft, faPlus, faLocationDot, faUsers, faArrowRight);
 
 export const appConfig: ApplicationConfig = {
   providers: [

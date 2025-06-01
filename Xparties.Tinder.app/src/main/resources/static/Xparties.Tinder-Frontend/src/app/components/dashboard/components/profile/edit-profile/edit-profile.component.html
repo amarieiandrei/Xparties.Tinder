@@ -13,7 +13,7 @@
         <h2 class="text-lg font-bold mb-4">Media</h2>
 
         <ul class="grid grid-cols-3 gap-4">
-            @for ( _ of [1, 2, 3]; track _ ) {
+            @for ( image of uploadedImages(); track uploadedImages.externalId ) {
             <!-- Photo Card -->
             <li class="relative aspect-[9/14] rounded-lg cursor-pointer">
                 <img src="/assets/user-test/user-test-photo.jpg" alt="User Photo"
@@ -26,7 +26,7 @@
             }
 
             <!-- Placeholder Cards -->
-            @for ( _ of [1, 2, 3]; track _ ) {
+            @for ( placeholder of placeholders(); track placeholder ) {
             <li (click)="fileInput.click()"
                 class="relative aspect-[9/14] bg-[var(--card-placeholder-background)] rounded-lg border-2 border-gray-500 border-dashed flex items-center justify-center cursor-pointer">
 
@@ -40,6 +40,8 @@
             </li>
             }
         </ul>
+
+        <button (click)="getAllPhotos()">la ce ma ajuta?</button>
 
         <!-- About Me Section -->
         <h2 class="text-lg font-bold my-4">About Me</h2>

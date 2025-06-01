@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnDestroy, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, QueryList, signal, ViewChildren } from '@angular/core';
 
 // animations
 import { slideFromBottomToTop } from '../../../../../shared/animations/slide-bottom-to-top.animation';
@@ -60,6 +60,10 @@ export class EditProfileComponent implements OnDestroy {
   constructor() { }
 
   selectedFile?: any;
+  uploadedImages: any = signal<string[]>([]); // Signal to store uploaded images
+  placeholders: any = signal<number[]>([1, 2, 3, 4, 5, 6]);
+
+  // TODO: REFACTOR
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -76,7 +80,11 @@ export class EditProfileComponent implements OnDestroy {
     }
 
     this._photoService.uploadPhoto(this.selectedFile).subscribe({
-      next: res => alert(`GOOD: ${res}`),
+      next: res => {
+        alert(`Upload successful: ${res}`);
+        this.uploadedImages.update((images: any) => [...images, res.url]); // Add the new image URL to the signal
+        this.placeholders.update((p: any) => p.toSpliced(-1, 1));
+      },
       error: () => alert('Upload failed.')
     });
   }
