@@ -20,21 +20,43 @@
                     Click on any event to start matching with other participants
                 </p>
             </div>
-            <span class="px-4 py-2 text-sm lg:text-lg font-semibold whitespace-nowrap underline text-glow">
-                3 Events
+            <span
+                class="px-4 py-2 text-sm lg:text-lg font-semibold whitespace-nowrap underline text-glow flex items-center gap-2">
+                <span *ngIf="isBusy(); else count">
+                    <hlm-spinner class="w-4 h-4 lg:w-6 lg:h-6 flex justify-center" />
+                </span>
+                <ng-template #count>{{ enrolledEvents().length }}</ng-template>
+                Events
             </span>
         </div>
     </section>
 
+
     <ul class="grid gap-6 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        @if ( isBusy() ) {
+        <!-- TODO: Check the skeleton -->
+        @for (_ of [1, 2, 3, 4, 5, 6]; track _) {
+        <li class="relative rounded-xl shadow-custom overflow-hidden">
+            <div class='flex items-center p-2 m-2 w-fit space-x-2 w-full h-24 block rounded-xl'>
+                <hlm-skeleton class='w-12 h-12 w-1/4' />
+                <div class='space-y-1 w-full'>
+                    <hlm-skeleton class='h-5 w-3/4' />
+                    <hlm-skeleton class='h-4 w-2/4' />
+                </div>
+            </div>
+        </li>
+        }
+        } @else {
+        @defer ( when !isBusy() ) {
         @for (enrolledEvent of enrolledEvents(); track enrolledEvent.externalId) {
-        <li class="rounded-2xl sm:rounded-3xl overflow-hidden hover-lift cursor-pointer group shadow-custom">
+        <li
+            class="rounded-2xl sm:rounded-3xl overflow-hidden hover-lift cursor-pointer group shadow-custom animate-fade-in">
             <div class="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
                 <img [src]="enrolledEvent.src" [alt]="enrolledEvent.name"
                     class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                 <div class="absolute top-4 right-4">
                     <span class="bg-[#0fa448] text-white px-3 py-1 rounded-full text-xs sm:text-sm
-                        font-semibold">Enrolled</span>
+                                font-semibold">Enrolled</span>
                 </div>
             </div>
 
@@ -66,6 +88,20 @@
                 </button>
             </div>
         </li>
+        } @empty {
+        <li
+            class="col-span-full flex justify-center items-center min-h-[400px] rounded-xl shadow-custom p-6 opacity-0 animate-fade-in">
+            <div class="text-center max-w-xs md:max-w-md">
+                <img src="../../../../assets/placeholders/no-events-found.png" alt="No Events Placeholder"
+                    class="mx-auto w-32 h-32 md:w-48 md:h-48 object-cover mb-4 md:mb-6">
+                <h3 class="text-xl md:text-2xl font-semibold mb-2">No Upcoming Events Found</h3>
+                <p class="text-sm md:text-base text-gray-500">It looks like there are no upcoming events for you at the
+                    moment. Check the events page and start enroll into events to find your perfect match!
+                </p>
+            </div>
+        </li>
+        }
+        }
         }
     </ul>
 </div>
