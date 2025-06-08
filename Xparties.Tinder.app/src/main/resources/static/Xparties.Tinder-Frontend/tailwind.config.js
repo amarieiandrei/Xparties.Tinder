@@ -4,6 +4,14 @@ module.exports = {
   content: ["./src/**/*.{html,ts}", "./libs/ui/**/*.{html,ts}"],
   theme: {
     extend: {
+      colors: {
+        "xpt-pink": "#d12c7b",
+        "xpt-purple": "#9038ef",
+        "xpt-violet": "#594ce2",
+      },
+      boxShadow: {
+        "xpt-glow": "0 8px 20px rgba(145, 56, 239, 0.3)", // soft purple glow
+      },
       animation: {
         "fade-in": "fadeIn 0.5s ease-out forwards",
 
@@ -52,5 +60,14 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/aspect-ratio")],
+  plugins: [
+    require("@tailwindcss/aspect-ratio"),
+    function ({ addUtilities }) {
+      addUtilities({
+        ".text-glow": {
+          textShadow: "0 2px 10px rgba(144, 56, 239, 0.6)", // purple glow
+        },
+      });
+    },
+  ],
 };

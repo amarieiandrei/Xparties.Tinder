@@ -1,36 +1,71 @@
-<div class="px-4 py-16">
-    <section class="flex flex-col items-center justify-center">
-        <h1>Match. Meet. Party.</h1>
-        <p>Connect with like-minded people at the events you love. Swipe to find your perfect event companion!</p>
+<div class="px-4 py-12 sm:py-16 lg:px-24">
+    <section class="text-center max-w-xl mx-auto mb-12">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+            <span class="text-xpt-pink">Match. </span>
+            <span class="text-xpt-purple">Meet. </span>
+            <span class="text-xpt-violet">Party. </span>
+        </h1>
+        <p class="text-base sm:text-lg text-muted-foreground">
+            Connect with like-minded people at the events you love. Swipe to find your perfect event companion!
+        </p>
     </section>
 
-    <section>
-        <h4> Your Upcoming Events</h4>
-        <p> Click on any event to start matching with other participants</p>
-        <span>3 Events</span>
+    <section class="mb-8 lg:mb-12">
+        <div class="flex flex-row items-center justify-between gap-4 mb-6">
+            <div>
+                <h4 class="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2">
+                    Your Upcoming Events
+                </h4>
+                <p class="text-gray-500 text-base sm:text-md lg:text-lg">
+                    Click on any event to start matching with other participants
+                </p>
+            </div>
+            <span class="px-4 py-2 text-sm lg:text-lg font-semibold whitespace-nowrap underline text-glow">
+                3 Events
+            </span>
+        </div>
     </section>
 
-    <ul>
-        <li>
-            <img src="" alt="">
-            <span>Enrolled</span>
-            <p>Summer Music Festival 2024</p>
-            <div class="flex">
-                <fa-icon [icon]="faCalendar"></fa-icon>
-                <p>Jun 1, 2025</p>
+    <ul class="grid gap-6 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        @for (enrolledEvent of enrolledEvents(); track enrolledEvent.externalId) {
+        <li class="rounded-2xl sm:rounded-3xl overflow-hidden hover-lift cursor-pointer group shadow-custom">
+            <div class="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
+                <img [src]="enrolledEvent.src" [alt]="enrolledEvent.name"
+                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                <div class="absolute top-4 right-4">
+                    <span class="bg-[#0fa448] text-white px-3 py-1 rounded-full text-xs sm:text-sm
+                        font-semibold">Enrolled</span>
+                </div>
             </div>
-            <div class="flex">
-                <fa-icon [icon]="faLocationDot"></fa-icon>
-                <p>Costinesti, Romania</p>
+
+            <div class="p-6 sm:p-7 lg:p-8">
+                <h3
+                    class="whitespace-nowrap overflow-hidden text-ellipsis text-glow text-base text-xl lg:text-2xl font-bold bg-gradient-to-r from-xpt-pink via-xpt-purple to-xpt-violet bg-clip-text text-transparent mb-4 sm:mb-6 transition-transform duration-300 group-hover:scale-105">
+                    {{ enrolledEvent.name }}
+                </h3>
+
+                <div class="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                    <div class="flex items-center text-gray-600">
+                        <fa-icon [icon]="faCalendar" class="text-primary mr-2 text-lg"></fa-icon>
+                        <p class="text-base text-primary sm:text-lg">{{enrolledEvent.date | date}}</p>
+                    </div>
+                    <div class="flex items-center text-gray-600">
+                        <fa-icon [icon]="faLocationDot" class="text-primary mr-2 text-lg"></fa-icon>
+                        <p class="text-base text-primary sm:text-lg">{{ enrolledEvent.location }}</p>
+                    </div>
+                    <div class="flex items-center text-gray-600">
+                        <fa-icon [icon]="faUsers" class="text-primary mr-2 text-lg"></fa-icon>
+                        <p class="text-base text-primary sm:text-lg">{{ enrolledEvent.participants }}</p>
+                    </div>
+                </div>
+
+                <button hlmBtn
+                    class="w-full px-8 py-8 rounded-xl sm:rounded-2xl transition-transform duration-300 group-hover:scale-105 bg-gradient-to-r from-xpt-pink via-xpt-purple to-xpt-violet text-white font-semibold shadow-xpt-glow">
+                    <span class="text-base sm:text-lg mr-2">Start Matching</span>
+                    <fa-icon [icon]="faArrowRight" class="text-medium sm:text-base"></fa-icon>
+                </button>
             </div>
-            <div class="flex">
-                <fa-icon [icon]="faUsers"></fa-icon>
-                <p>28 participants</p>
-            </div>
-            <button>
-                Start Matching
-                <fa-icon [icon]="faArrowRight"></fa-icon>
-            </button>
         </li>
+        }
     </ul>
 </div>
