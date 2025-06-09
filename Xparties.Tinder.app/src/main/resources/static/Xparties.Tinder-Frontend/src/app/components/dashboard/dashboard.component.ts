@@ -51,8 +51,10 @@ export class DashboardComponent {
     this._router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      if (!event.urlAfterRedirects.includes('profile/edit')) {
-        this.currentRoute = event.urlAfterRedirects.split('/').pop() || '';
+      const url = event.urlAfterRedirects;
+
+      if (!url.includes('profile/edit') && !url.includes('home/match-explorer')) {
+        this.currentRoute = url.split('/').pop() || '';
       }
     });
   }

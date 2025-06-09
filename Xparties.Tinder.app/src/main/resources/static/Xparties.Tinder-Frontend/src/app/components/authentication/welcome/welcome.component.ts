@@ -11,7 +11,7 @@ import { HlmLabelDirective } from '../../../../../libs/ui/ui-label-helm/src/lib/
 import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
-  selector: 'app-welcome',
+  selector: 'xpt-welcome',
   imports: [HlmButtonDirective, HlmSwitchComponent, HlmLabelDirective],
   templateUrl: './welcome.component.html',
 })

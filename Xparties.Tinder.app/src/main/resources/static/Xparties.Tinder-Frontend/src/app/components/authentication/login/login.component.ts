@@ -17,7 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'xpt-login',
   imports: [CommonModule, FontAwesomeModule, HlmButtonDirective, HlmSwitchComponent, HlmLabelDirective],
   templateUrl: './login.component.html',
 })

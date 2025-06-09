@@ -20,7 +20,14 @@ export const dashboardRoutes: Routes = [
             {
                 path: 'home',
                 loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent),
-                data: { animation: 'Home' }
+                data: { animation: 'Home' },
+                children: [
+                    {
+                        path: 'match-explorer',
+                        loadComponent: () => import('./components/home/match-explorer/match-explorer.component').then(m => m.MatchExplorerComponent),
+                        data: { animation: 'MatchExplorer', noProfileAnimation: true }
+                    }
+                ]
             },
             {
                 path: 'chat',

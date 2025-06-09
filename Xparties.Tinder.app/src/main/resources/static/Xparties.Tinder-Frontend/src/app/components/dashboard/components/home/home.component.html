@@ -49,7 +49,7 @@
         } @else {
         @defer ( when !isBusy() ) {
         @for (enrolledEvent of enrolledEvents(); track enrolledEvent.externalId) {
-        <li
+        <li (click)="navigateToMatchExplorer()"
             class="rounded-2xl sm:rounded-3xl overflow-hidden hover-lift cursor-pointer group shadow-custom animate-fade-in">
             <div class="relative h-48 sm:h-56 lg:h-64 overflow-hidden">
                 <img [src]="enrolledEvent.src" [alt]="enrolledEvent.name"
@@ -105,3 +105,5 @@
         }
     </ul>
 </div>
+
+<router-outlet></router-outlet>

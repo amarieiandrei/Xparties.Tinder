@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './core/services/theme.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'xpt-root',
   imports: [RouterOutlet],
   template: `<router-outlet></router-outlet>`
 })
